@@ -1,8 +1,10 @@
 package com.laba.aboher.models;
 
+import java.util.Objects;
+
 public class Dog extends Animal{
 
-    public int happiness; // percent level of the dog happiness
+    protected int happiness; // percent level of the dog happiness
 
     public Dog(String specie, String status) {
         super(specie, status);
@@ -29,5 +31,35 @@ public class Dog extends Animal{
     @Override
     public void move() {
         System.out.println("Dog moves");
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "happiness=" + happiness +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dog d = (Dog) o;
+        return happiness == d.happiness &&
+                getSpecie().equals(d.getSpecie()) &&
+                getStatus().equals(d.getStatus()) &&
+                health == d.health && // I can access this superclass field only because it's protected.
+                getHunger() == d.getHunger() &&
+                getTiredness() == d.getTiredness();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(happiness,
+                getSpecie(),
+                getStatus(),
+                getHealth(),
+                getHunger(),
+                getTiredness());
     }
 }

@@ -6,7 +6,7 @@ public abstract class Animal {
     private String status;  // it could be Domestic, Wild (meaning that is in
                             // the wild), Zoo (meaning that is in the zoo),
                             // Endangered (in danger of extinction)
-    private int health;     // percent level of health
+    protected int health;     // percent level of health
 
     private int hunger;     // percent level of hunger
 
@@ -72,4 +72,14 @@ public abstract class Animal {
     public abstract void speak();
     public abstract void move();
 
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "specie='" + specie + '\'' +
+                ", status='" + status + '\'' +
+                ", health=" + health +
+                ", hunger=" + hunger +
+                ", tiredness=" + tiredness +
+                '}';
+    }
 }
