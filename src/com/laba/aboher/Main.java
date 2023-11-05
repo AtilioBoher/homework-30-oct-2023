@@ -1,13 +1,14 @@
 package com.laba.aboher;
 
 
+import com.laba.aboher.interfaces.*;
 import com.laba.aboher.models.*;
 
 public class Main {
     public static void main(String[] args) {
 //        homework2023oct30();
-        homework2023nov2();
-
+//        homework2023nov2();
+        homework2023nov6();
     }
 
     private static void homework2023oct30() {
@@ -15,34 +16,34 @@ public class Main {
                 "------------------------------------------------------------");
         System.out.println("\nDog:");
         Dog firulais = new Dog("Golden Retriever", "Domestic");
-        firulais.speak();
+        firulais.makeNoise();
         firulais.move();
 
         System.out.println("\nCat:");
         Cat carlie = new Cat("Bobcat", "Wild");
-        carlie.speak();
+        carlie.makeNoise();
         carlie.move();
 
         System.out.println("\nLion:");
         Lion susan = new Lion("Lion", "Wild");
-        susan.speak();
+        susan.makeNoise();
         susan.move();
 
         System.out.println("\nCrocodile:");
         Crocodile coco = new Crocodile("Crocodile", "Wild");
-        coco.speak();
+        coco.makeNoise();
         coco.move();
         coco.swim();
 
         System.out.println("\nElephant:");
         // rupert is endangered, it can't be hunted
         Elephant rupert = new Elephant("Asian Elephant", "Endangered");
-        rupert.speak();
+        rupert.makeNoise();
         rupert.move();
 
         System.out.println("\nCapybara:");
         Capybara jim = new Capybara("Capybara", "Wild");
-        jim.speak();
+        jim.makeNoise();
         jim.move();
 
 
@@ -86,8 +87,8 @@ public class Main {
 
         Animal[] animals = {firulais, carlie, susan, coco, rupert, jim};
         for (Animal animal : animals) {
-            System.out.println("\nAnimal: " + animal.getSpecie());
-            animal.speak();
+            System.out.println("\nAnimal: " + animal.getSPECIE());
+            animal.makeNoise();
             animal.move();
         }
     }
@@ -124,9 +125,9 @@ public class Main {
                 dummyCoco, dummyRupert, dummyJim};
         int i = 0;
         for (Animal animal : animals) {
-            System.out.println("\nCall animal.getSpecie(): " + animal.getSpecie());
+            System.out.println("\nCall animal.getSpecie(): " + animal.getSPECIE());
             System.out.print("Call animal.speak(): ");
-            animal.speak();
+            animal.makeNoise();
             System.out.print("Call animal.move(): ");
             animal.move();
             System.out.println("Call toString(): " + animal);
@@ -134,6 +135,73 @@ public class Main {
             System.out.println("Call dummyAnimal.hashCode(): " + dummyAnimals[i].hashCode());
             System.out.println("Call animal.equals(dummyAnimal): " + animal.equals(dummyAnimals[i]));
             i++;
+        }
+    }
+
+    public static void homework2023nov6() {
+        // Animals
+        Dog firulais = new Dog("Golden Retriever", "Domestic");
+        Cat carlie = new Cat("Bobcat", "Wild");
+        Lion susan = new Lion("Lion", "Wild");
+        Crocodile coco = new Crocodile("Crocodile", "Wild");
+        Elephant rupert = new Elephant("Asian Elephant", "Endangered");
+        Capybara jim = new Capybara("Capybara", "Wild");
+        Eagle jeremy = new Eagle("Eagle","Wild");
+        Nightingale rose = new Nightingale("Nightingale","Wild");
+        // Humans
+        // Hunter
+        Riffle riffle = new Riffle(70);
+        Hunter john = new Hunter("John", riffle);
+        // Veterinarian
+        Syringe syringe = new Syringe();
+        Veterinarian michael = new Veterinarian("Michael", syringe);
+
+        System.out.println("""
+
+                 Polymorphism was used in the previous home-task, in this block
+                 we'll use interfaces. Lets start with IRun interface, which
+                 humans and animals alike implement.
+                """);
+        IRun[] runners = {firulais, carlie, susan, coco, rupert, jim, john, michael};
+        for (IRun runner : runners) {
+            runner.Run();
+        }
+
+        System.out.println("""
+                ------------------------------------------------------------
+                ------------------------------------------------------------
+                 IFly interface:
+                 
+                """);
+        IFly[] flyers = {jeremy, rose};
+        for (IFly flyer : flyers) {
+            flyer.fly();
+        }
+
+        System.out.println("""
+                ------------------------------------------------------------
+                ------------------------------------------------------------
+                 IPet interface:
+                 
+                """);
+        // I defined two petter objects and two pettable objects.
+        IPet[] petters = {john, michael};
+        Pettable[] pettables = {firulais, carlie};
+        int i = 0;
+        for(IPet petter : petters) {
+            petter.pet(pettables[i]);
+            i++;
+        }
+
+        System.out.println("""
+                ------------------------------------------------------------
+                ------------------------------------------------------------
+                 IKillPrey interface:
+                 
+                """);
+        IKillPrey[] hunters = {susan, coco};
+        for(IKillPrey hunter : hunters) {
+            hunter.killPray();
         }
     }
 }

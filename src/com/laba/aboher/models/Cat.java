@@ -1,8 +1,11 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.interfaces.IRun;
+import com.laba.aboher.interfaces.Pettable;
+
 import java.util.Objects;
 
-public class Cat extends Animal{
+public class Cat extends Animal implements IRun, Pettable {
 
     protected int happiness; // percent level of the cat happiness
 
@@ -24,7 +27,7 @@ public class Cat extends Animal{
     }
 
     @Override
-    public void speak() {
+    public void makeNoise() {
         System.out.println("Miaw, miaw.");
     }
 
@@ -46,7 +49,7 @@ public class Cat extends Animal{
         if (o == null || getClass() != o.getClass()) return false;
         Cat c = (Cat) o;
         return happiness == c.happiness &&
-                getSpecie().equals(c.getSpecie()) &&
+                getSPECIE().equals(c.getSPECIE()) &&
                 getStatus().equals(c.getStatus()) &&
                 health == c.health && // I can access this superclass field only because it's protected.
                 getHunger() == c.getHunger() &&
@@ -56,10 +59,21 @@ public class Cat extends Animal{
     @Override
     public int hashCode() {
         return Objects.hash(happiness,
-                getSpecie(),
+                getSPECIE(),
                 getStatus(),
                 getHealth(),
                 getHunger(),
                 getTiredness());
+    }
+
+    @Override
+    public void Run() {
+        System.out.println("Cat runs...");
+    }
+
+    @Override
+    public void letHimSelfBePet() {
+        System.out.println("I'm being petted, I'm happy and follow the one who petted me...!!!");
+        setHappiness(100);
     }
 }

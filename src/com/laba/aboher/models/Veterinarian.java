@@ -1,6 +1,8 @@
 package com.laba.aboher.models;
 
-public class Veterinarian extends Person{
+import com.laba.aboher.interfaces.IRun;
+
+public class Veterinarian extends Person implements IRun {
     private Syringe syringe;
 
     public Veterinarian(String name,Syringe syringe) {
@@ -29,5 +31,10 @@ public class Veterinarian extends Person{
         animal.setHealth(100);
         this.syringe.setLoaded(false);
         System.out.println("Animal has been healed!");
+    }
+
+    @Override
+    public void Run() {
+        System.out.println("Veterinarian runs...");
     }
 }

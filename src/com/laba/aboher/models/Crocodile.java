@@ -1,8 +1,11 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.interfaces.IKillPrey;
+import com.laba.aboher.interfaces.IRun;
+
 import java.util.Objects;
 
-public class Crocodile extends Animal{
+public class Crocodile extends Animal implements IRun, IKillPrey {
 
     protected int aggressiveness; // percent level of the crocodile's aggressiveness
 
@@ -24,7 +27,7 @@ public class Crocodile extends Animal{
     }
 
     @Override
-    public void speak() {
+    public void makeNoise() {
         System.out.println("Grrrrrrrr!!!.");
     }
 
@@ -50,7 +53,7 @@ public class Crocodile extends Animal{
         if (o == null || getClass() != o.getClass()) return false;
         Crocodile c = (Crocodile) o;
         return aggressiveness == c.aggressiveness &&
-                getSpecie().equals(c.getSpecie()) &&
+                getSPECIE().equals(c.getSPECIE()) &&
                 getStatus().equals(c.getStatus()) &&
                 health == c.health && // I can access this superclass field only because it's protected.
                 getHunger() == c.getHunger() &&
@@ -60,10 +63,20 @@ public class Crocodile extends Animal{
     @Override
     public int hashCode() {
         return Objects.hash(aggressiveness,
-                getSpecie(),
+                getSPECIE(),
                 getStatus(),
                 getHealth(),
                 getHunger(),
                 getTiredness());
+    }
+
+    @Override
+    public void Run() {
+        System.out.println("Crocodile runs...");
+    }
+
+    @Override
+    public void killPray() {
+        System.out.println("I'm a Crocodile, and I've killed a prey to eat");
     }
 }

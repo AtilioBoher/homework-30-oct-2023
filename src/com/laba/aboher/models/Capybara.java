@@ -1,8 +1,10 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.interfaces.IRun;
+
 import java.util.Objects;
 
-public class Capybara extends Animal{
+public class Capybara extends Animal implements IRun {
 
     protected int cuteness;    // percent level of the capybara's cuteness
                             // we have a lot of those here in Argentina,
@@ -26,7 +28,7 @@ public class Capybara extends Animal{
     }
 
     @Override
-    public void speak() {
+    public void makeNoise() {
         System.out.println("Huff, huff.");
     }
 
@@ -48,7 +50,7 @@ public class Capybara extends Animal{
         if (o == null || getClass() != o.getClass()) return false;
         Capybara c = (Capybara) o;
         return cuteness == c.cuteness &&
-                getSpecie().equals(c.getSpecie()) &&
+                getSPECIE().equals(c.getSPECIE()) &&
                 getStatus().equals(c.getStatus()) &&
                 health == c.health && // I can access this superclass field only because it's protected.
                 getHunger() == c.getHunger() &&
@@ -58,10 +60,15 @@ public class Capybara extends Animal{
     @Override
     public int hashCode() {
         return Objects.hash(cuteness,
-                getSpecie(),
+                getSPECIE(),
                 getStatus(),
                 getHealth(),
                 getHunger(),
                 getTiredness());
+    }
+
+    @Override
+    public void Run() {
+        System.out.println("Capybara runs...");
     }
 }

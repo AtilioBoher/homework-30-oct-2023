@@ -1,6 +1,10 @@
 package com.laba.aboher.models;
 
-public abstract class Person {
+import com.laba.aboher.interfaces.IPet;
+import com.laba.aboher.interfaces.IRun;
+
+public abstract class Person implements IPet {
+
     private String profession;
     private String name;
 
