@@ -7,12 +7,20 @@ import java.util.Objects;
 
 public class Cat extends Animal implements IRun, Pettable {
 
+    private static int numberOfCats = 0; // count the number of cats
+
     protected int happiness; // percent level of the cat happiness
 
     public Cat(String specie, String status) {
         super(specie, status);
         this.happiness = 100;
+        numberOfCats++;
     }
+
+    public static int getNumberOfCats() { // Doesn't have a setter because it's
+        return numberOfCats;              // not meant to be changed by the user,
+    }                                     // it increments by itself when the
+                                          // constructor it's called.
 
     public int getHappiness() {
         return happiness;
@@ -49,7 +57,7 @@ public class Cat extends Animal implements IRun, Pettable {
         if (o == null || getClass() != o.getClass()) return false;
         Cat c = (Cat) o;
         return happiness == c.happiness &&
-                getSPECIE().equals(c.getSPECIE()) &&
+                getSpecie().equals(c.getSpecie()) &&
                 getStatus().equals(c.getStatus()) &&
                 health == c.health && // I can access this superclass field only because it's protected.
                 getHunger() == c.getHunger() &&
@@ -59,7 +67,7 @@ public class Cat extends Animal implements IRun, Pettable {
     @Override
     public int hashCode() {
         return Objects.hash(happiness,
-                getSPECIE(),
+                getSpecie(),
                 getStatus(),
                 getHealth(),
                 getHunger(),
@@ -67,7 +75,7 @@ public class Cat extends Animal implements IRun, Pettable {
     }
 
     @Override
-    public void Run() {
+    public void run() {
         System.out.println("Cat runs...");
     }
 

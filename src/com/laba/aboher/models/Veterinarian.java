@@ -34,7 +34,7 @@ public class Veterinarian extends Person implements IRun {
     }
 
     @Override
-    public void Run() {
+    public void run() {
         System.out.println("Veterinarian runs...");
     }
 }

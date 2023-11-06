@@ -20,7 +20,7 @@ public abstract class Animal {
         this.tiredness = 0;
     }
 
-    public final String getSPECIE() { // this field does not have a setter because
+    public final String getSpecie() { // this field does not have a setter because
         return this.SPECIE;     // is a final field, meaning that an animal
     }                           // can't change the specie it belongs, it's only
                                 // defined in the constructor

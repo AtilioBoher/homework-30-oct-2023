@@ -87,7 +87,7 @@ public class Main {
 
         Animal[] animals = {firulais, carlie, susan, coco, rupert, jim};
         for (Animal animal : animals) {
-            System.out.println("\nAnimal: " + animal.getSPECIE());
+            System.out.println("\nAnimal: " + animal.getSpecie());
             animal.makeNoise();
             animal.move();
         }
@@ -125,7 +125,7 @@ public class Main {
                 dummyCoco, dummyRupert, dummyJim};
         int i = 0;
         for (Animal animal : animals) {
-            System.out.println("\nCall animal.getSpecie(): " + animal.getSPECIE());
+            System.out.println("\nCall animal.getSpecie(): " + animal.getSpecie());
             System.out.print("Call animal.speak(): ");
             animal.makeNoise();
             System.out.print("Call animal.move(): ");
@@ -164,7 +164,7 @@ public class Main {
                 """);
         IRun[] runners = {firulais, carlie, susan, coco, rupert, jim, john, michael};
         for (IRun runner : runners) {
-            runner.Run();
+            runner.run();
         }
 
         System.out.println("""
@@ -202,6 +202,19 @@ public class Main {
         IKillPrey[] hunters = {susan, coco};
         for(IKillPrey hunter : hunters) {
             hunter.killPray();
+        }
+
+        System.out.println("""
+                ------------------------------------------------------------
+                ------------------------------------------------------------
+                 Test static field:
+                 
+                """);
+        System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats() +
+                "\nI'll instantiate some more:");
+        for (i = 0; i < 5; i++) {
+            carlie = new Cat("Bobcat", "Wild");
+            System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats());
         }
     }
 }

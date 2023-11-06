@@ -36,7 +36,7 @@ public final class Nightingale extends Animal implements IFly {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Nightingale n = (Nightingale) o;
-        return getSPECIE().equals(n.getSPECIE()) &&
+        return getSpecie().equals(n.getSpecie()) &&
                 getStatus().equals(n.getStatus()) &&
                 health == n.health && // I can access this superclass field only because it's protected.
                 getHunger() == n.getHunger() &&
@@ -46,7 +46,7 @@ public final class Nightingale extends Animal implements IFly {
     @Override
     public int hashCode() {
         return Objects.hash(
-                getSPECIE(),
+                getSpecie(),
                 getStatus(),
                 getHealth(),
                 getHunger(),

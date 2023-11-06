@@ -48,7 +48,7 @@ public class Lion extends Animal implements IRun, IKillPrey {
         if (o == null || getClass() != o.getClass()) return false;
         Lion l = (Lion) o;
         return aggressiveness == l.aggressiveness &&
-                getSPECIE().equals(l.getSPECIE()) &&
+                getSpecie().equals(l.getSpecie()) &&
                 getStatus().equals(l.getStatus()) &&
                 health == l.health && // I can access this superclass field only because it's protected.
                 getHunger() == l.getHunger() &&
@@ -58,7 +58,7 @@ public class Lion extends Animal implements IRun, IKillPrey {
     @Override
     public int hashCode() {
         return Objects.hash(aggressiveness,
-                getSPECIE(),
+                getSpecie(),
                 getStatus(),
                 getHealth(),
                 getHunger(),
@@ -66,7 +66,7 @@ public class Lion extends Animal implements IRun, IKillPrey {
     }
 
     @Override
-    public void Run() {
+    public void run() {
         System.out.println("Lion runs...");
     }
 

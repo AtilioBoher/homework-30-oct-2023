@@ -49,7 +49,7 @@ public class Dog extends Animal implements IRun, Pettable {
         if (o == null || getClass() != o.getClass()) return false;
         Dog d = (Dog) o;
         return happiness == d.happiness &&
-                getSPECIE().equals(d.getSPECIE()) &&
+                getSpecie().equals(d.getSpecie()) &&
                 getStatus().equals(d.getStatus()) &&
                 health == d.health && // I can access this superclass field only because it's protected.
                 getHunger() == d.getHunger() &&
@@ -59,7 +59,7 @@ public class Dog extends Animal implements IRun, Pettable {
     @Override
     public int hashCode() {
         return Objects.hash(happiness,
-                getSPECIE(),
+                getSpecie(),
                 getStatus(),
                 getHealth(),
                 getHunger(),
@@ -67,7 +67,7 @@ public class Dog extends Animal implements IRun, Pettable {
     }
 
     @Override
-    public void Run() {
+    public void run() {
         System.out.println("Dog runs...");
     }
 
