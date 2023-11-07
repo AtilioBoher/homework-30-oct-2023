@@ -15,34 +15,34 @@ public class Main {
         System.out.println("INDIVIDUAL ANIMAL TEST:\n" +
                 "------------------------------------------------------------");
         System.out.println("\nDog:");
-        Dog firulais = new Dog("Golden Retriever", "Domestic");
+        Dog firulais = new Dog("Golden Retriever", "Domestic",6);
         firulais.makeNoise();
         firulais.move();
 
         System.out.println("\nCat:");
-        Cat carlie = new Cat("Bobcat", "Wild");
+        Cat carlie = new Cat("Bobcat", "Wild", 6);
         carlie.makeNoise();
         carlie.move();
 
         System.out.println("\nLion:");
-        Lion susan = new Lion("Lion", "Wild");
+        Lion susan = new Lion("Lion", "Wild", 6);
         susan.makeNoise();
         susan.move();
 
         System.out.println("\nCrocodile:");
-        Crocodile coco = new Crocodile("Crocodile", "Wild");
+        Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
         coco.makeNoise();
         coco.move();
         coco.swim();
 
         System.out.println("\nElephant:");
         // rupert is endangered, it can't be hunted
-        Elephant rupert = new Elephant("Asian Elephant", "Endangered");
+        Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
         rupert.makeNoise();
         rupert.move();
 
         System.out.println("\nCapybara:");
-        Capybara jim = new Capybara("Capybara", "Wild");
+        Capybara jim = new Capybara("Capybara", "Wild", 6);
         jim.makeNoise();
         jim.move();
 
@@ -61,7 +61,7 @@ public class Main {
                 ------------------------------------------------------------""");
 
         Riffle riffle = new Riffle(70);
-        Hunter john = new Hunter("John", riffle);
+        Hunter john = new Hunter("John", 40, riffle);
 
         john.huntAnimal(susan); // susan is wild, it can be hunted
         john.huntAnimal(coco);  // cooc is in the zoo, it can't be hunted
@@ -72,7 +72,7 @@ public class Main {
                 ------------------------------------------------------------""");
 
         Syringe syringe = new Syringe();
-        Veterinarian michael = new Veterinarian("Michael", syringe);
+        Veterinarian michael = new Veterinarian("Michael", 40, syringe);
         michael.healAnimal(coco);
         // Now that coco is well, it can't be healed if we try again because
         // his health is 100% now.
@@ -94,23 +94,23 @@ public class Main {
     }
 
     public static void homework2023nov2() {
-        Dog firulais = new Dog("Golden Retriever", "Domestic");
-        Dog dummyFirulais = new Dog("Golden Retriever", "Domestic");
+        Dog firulais = new Dog("Golden Retriever", "Domestic", 6);
+        Dog dummyFirulais = new Dog("Golden Retriever", "Domestic", 6);
 
-        Cat carlie = new Cat("Bobcat", "Wild");
-        Cat dummyCarlie = new Cat("Bobcat", "Wild");
+        Cat carlie = new Cat("Bobcat", "Wild", 6);
+        Cat dummyCarlie = new Cat("Bobcat", "Wild", 6);
 
-        Lion susan = new Lion("Lion", "Wild");
-        Lion dummySusan = new Lion("Lion", "Wild");
+        Lion susan = new Lion("Lion", "Wild", 6);
+        Lion dummySusan = new Lion("Lion", "Wild", 6);
 
-        Crocodile coco = new Crocodile("Crocodile", "Wild");
-        Crocodile dummyCoco = new Crocodile("Crocodile", "Wild");
+        Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
+        Crocodile dummyCoco = new Crocodile("Crocodile", "Wild", 6);
 
-        Elephant rupert = new Elephant("Asian Elephant", "Endangered");
-        Elephant dummyRupert = new Elephant("Asian Elephant", "Endangered");
+        Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
+        Elephant dummyRupert = new Elephant("Asian Elephant", "Endangered", 6);
 
-        Capybara jim = new Capybara("Capybara", "Wild");
-        Capybara dummyJim = new Capybara("Capybara", "Wild");
+        Capybara jim = new Capybara("Capybara", "Wild", 6);
+        Capybara dummyJim = new Capybara("Capybara", "Wild", 6);
         dummyJim.setHealth(75); // to test if the equals() method works properly
 
         System.out.println("""
@@ -140,21 +140,21 @@ public class Main {
 
     public static void homework2023nov6() {
         // Animals
-        Dog firulais = new Dog("Golden Retriever", "Domestic");
-        Cat carlie = new Cat("Bobcat", "Wild");
-        Lion susan = new Lion("Lion", "Wild");
-        Crocodile coco = new Crocodile("Crocodile", "Wild");
-        Elephant rupert = new Elephant("Asian Elephant", "Endangered");
-        Capybara jim = new Capybara("Capybara", "Wild");
-        Eagle jeremy = new Eagle("Eagle","Wild");
-        Nightingale rose = new Nightingale("Nightingale","Wild");
+        Dog firulais = new Dog("Golden Retriever", "Domestic", 6);
+        Cat carlie = new Cat("Bobcat", "Wild", 6);
+        Lion susan = new Lion("Lion", "Wild", 6);
+        Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
+        Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
+        Capybara jim = new Capybara("Capybara", "Wild", 6);
+        Eagle jeremy = new Eagle("Eagle","Wild", 6);
+        Nightingale rose = new Nightingale("Nightingale","Wild", 6);
         // Humans
         // Hunter
         Riffle riffle = new Riffle(70);
-        Hunter john = new Hunter("John", riffle);
+        Hunter john = new Hunter("John", 40, riffle);
         // Veterinarian
         Syringe syringe = new Syringe();
-        Veterinarian michael = new Veterinarian("Michael", syringe);
+        Veterinarian michael = new Veterinarian("Michael", 40, syringe);
 
         System.out.println("""
 
@@ -213,7 +213,7 @@ public class Main {
         System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats() +
                 "\nI'll instantiate some more:");
         for (i = 0; i < 5; i++) {
-            carlie = new Cat("Bobcat", "Wild");
+            carlie = new Cat("Bobcat", "Wild", 6);
             System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats());
         }
     }

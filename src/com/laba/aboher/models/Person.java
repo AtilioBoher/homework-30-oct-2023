@@ -5,12 +5,23 @@ import com.laba.aboher.interfaces.IRun;
 
 public abstract class Person implements IPet {
 
+    private int age;
+
     private String profession;
     private String name;
 
-    public Person(String profession, String name) {
+    public Person(String profession, String name, int age) {
         this.profession = profession;
         this.name = name;
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getProfession() {

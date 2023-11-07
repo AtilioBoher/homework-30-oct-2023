@@ -5,8 +5,8 @@ import com.laba.aboher.interfaces.IRun;
 public class Veterinarian extends Person implements IRun {
     private Syringe syringe;
 
-    public Veterinarian(String name,Syringe syringe) {
-        super("Veterinarian", name);
+    public Veterinarian(String name, int age,Syringe syringe) {
+        super("Veterinarian", name, age);
         this.syringe = syringe;
     }
 

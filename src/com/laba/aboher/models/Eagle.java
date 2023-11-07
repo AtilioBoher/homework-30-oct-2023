@@ -5,8 +5,8 @@ import com.laba.aboher.interfaces.IFly;
 import java.util.Objects;
 
 public final class Eagle extends Animal implements IFly {
-    public Eagle(String specie, String status) {
-        super(specie, status);
+    public Eagle(String specie, String status, int age) {
+        super(specie, status, age);
     }
 
     static {

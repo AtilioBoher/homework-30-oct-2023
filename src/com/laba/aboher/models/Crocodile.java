@@ -9,8 +9,8 @@ public class Crocodile extends Animal implements IRun, IKillPrey {
 
     protected int aggressiveness; // percent level of the crocodile's aggressiveness
 
-    public Crocodile(String specie, String status) {
-        super(specie, status);
+    public Crocodile(String specie, String status, int age) {
+        super(specie, status, age);
         this.aggressiveness = 0;
     }
 

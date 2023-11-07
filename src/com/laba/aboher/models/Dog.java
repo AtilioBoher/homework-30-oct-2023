@@ -9,8 +9,8 @@ public class Dog extends Animal implements IRun, Pettable {
 
     protected int happiness; // percent level of the dog happiness
 
-    public Dog(String specie, String status) {
-        super(specie, status);
+    public Dog(String specie, String status, int age) {
+        super(specie, status, age);
         this.happiness = 100;
     }
 

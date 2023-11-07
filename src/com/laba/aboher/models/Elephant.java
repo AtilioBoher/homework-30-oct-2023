@@ -8,8 +8,8 @@ public class Elephant extends Animal implements IRun {
 
     protected int aggressiveness; // percent level of the elephant's aggressiveness
 
-    public Elephant(String specie, String status) {
-        super(specie, status);
+    public Elephant(String specie, String status, int age) {
+        super(specie, status, age);
         this.aggressiveness = 0;
     }
 

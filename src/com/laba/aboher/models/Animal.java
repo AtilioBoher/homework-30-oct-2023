@@ -1,6 +1,8 @@
 package com.laba.aboher.models;
 
 public abstract class Animal {
+
+    private int age;
     private final String SPECIE;  // specie the animal belongs, for example: dog, cat,
                             // lion, snake.
     private String status;  // it could be Domestic, Wild (meaning that is in
@@ -12,12 +14,21 @@ public abstract class Animal {
 
     private int tiredness;  // percent level of tiredness
 
-    public Animal(String specie, String status) {
+    public Animal(String specie, String status, int age) {
         this.SPECIE = specie;
         this.status = status;
+        this.age = age;
         this.health = 100;
         this.hunger = 0;
         this.tiredness = 0;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public final String getSpecie() { // this field does not have a setter because
@@ -77,6 +88,7 @@ public abstract class Animal {
         return "Animal{" +
                 "specie='" + SPECIE + '\'' +
                 ", status='" + status + '\'' +
+                ", age=" + age +
                 ", health=" + health +
                 ", hunger=" + hunger +
                 ", tiredness=" + tiredness +

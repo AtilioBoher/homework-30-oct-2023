@@ -11,8 +11,8 @@ public class Cat extends Animal implements IRun, Pettable {
 
     protected int happiness; // percent level of the cat happiness
 
-    public Cat(String specie, String status) {
-        super(specie, status);
+    public Cat(String specie, String status, int age) {
+        super(specie, status, age);
         this.happiness = 100;
         numberOfCats++;
     }

@@ -7,8 +7,8 @@ import java.util.Objects;
 public final class Nightingale extends Animal implements IFly {
 
 
-    public Nightingale(String specie, String status) {
-        super(specie, status);
+    public Nightingale(String specie, String status, int age) {
+        super(specie, status, age);
     }
 
     @Override

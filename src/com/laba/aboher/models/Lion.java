@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Lion extends Animal implements IRun, IKillPrey {
     protected int aggressiveness; // percent level of the lion's aggressiveness
 
-    public Lion(String specie, String status) {
-        super(specie, status);
+    public Lion(String specie, String status, int age) {
+        super(specie, status, age);
         this.aggressiveness = 0;
     }
 

@@ -10,8 +10,8 @@ public class Capybara extends Animal implements IRun {
                             // we have a lot of those here in Argentina,
                             // A friend of my have one as a pets.
 
-    public Capybara(String specie, String status) {
-        super(specie, status);
+    public Capybara(String specie, String status, int age) {
+        super(specie, status, age);
         this.cuteness = 100;
     }
 

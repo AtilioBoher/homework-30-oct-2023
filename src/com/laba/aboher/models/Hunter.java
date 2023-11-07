@@ -5,8 +5,8 @@ import com.laba.aboher.interfaces.IRun;
 public class Hunter extends Person implements IRun {
     private Riffle riffle;
 
-    public Hunter(String name,Riffle riffle) {
-        super("Hunter", name);
+    public Hunter(String name, int age,Riffle riffle) {
+        super("Hunter", name, age);
         this.riffle = riffle;
     }
 
