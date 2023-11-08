@@ -1,5 +1,10 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.exceptions.InvalidAgeException;
+import com.laba.aboher.exceptions.InvalidHealthException;
+import com.laba.aboher.exceptions.InvalidHungerException;
+import com.laba.aboher.exceptions.InvalidTirednessException;
+
 public abstract class Animal {
 
     private int age;
@@ -27,7 +32,11 @@ public abstract class Animal {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age) throws InvalidAgeException {
+        if (age < 0) {
+            throw new InvalidAgeException(String.format("Invalid input age: " +
+                    "%d. Age can't be lower than 0.", age));
+        }
         this.age = age;
     }
 
@@ -48,10 +57,14 @@ public abstract class Animal {
         return health;
     }
 
-    public void setHealth(int health) {
-        if (health < 0 || health > 100) {
-            System.out.println("invalid level of health");
-            return;
+    public void setHealth(int health) throws InvalidHealthException {
+        if (health < 0) {
+            throw new InvalidHealthException(String.format("Invalid health: " +
+                    "%d. Health can not be lower than 0.", health));
+        }
+        if(health > 100) {
+            throw new InvalidHealthException(String.format("Invalid health: " +
+                    "%d. Health can not be greater than 100.", health));
         }
         this.health = health;
     }
@@ -60,10 +73,16 @@ public abstract class Animal {
         return hunger;
     }
 
-    public void setHunger(int hunger) {
-        if (hunger < 0 || hunger > 100) {
-            System.out.println("invalid level of hunger");
-            return;
+    public void setHunger(int hunger) throws InvalidHungerException {
+        if (hunger < 0) {
+            throw new InvalidHungerException(String.format("Invalid " +
+                            "hunger level: %d. Hunger can not be lower than 0.",
+                    hunger));
+        }
+        if(hunger > 100) {
+            throw new InvalidHungerException(String.format("Invalid hunger " +
+                            "level: %d. Hunger can not be greater than 100.",
+                    hunger));
         }
         this.hunger = hunger;
     }
@@ -72,10 +91,16 @@ public abstract class Animal {
         return tiredness;
     }
 
-    public void setTiredness(int tiredness) {
-        if (tiredness < 0 || tiredness > 100) {
-            System.out.println("invalid level of tiredness");
-            return;
+    public void setTiredness(int tiredness) throws InvalidTirednessException {
+        if (tiredness < 0) {
+            throw new InvalidTirednessException(String.format("Invalid " +
+                    "tiredness level: %d. Tiredness can not be lower than 0.",
+                    tiredness));
+        }
+        if(tiredness > 100) {
+            throw new InvalidTirednessException(String.format("Invalid" +
+                    "tiredness level: %d. Tiredness can not be greater than 100.",
+                    tiredness));
         }
         this.tiredness = tiredness;
     }

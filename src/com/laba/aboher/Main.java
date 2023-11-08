@@ -1,14 +1,22 @@
 package com.laba.aboher;
 
 
+import com.laba.aboher.exceptions.*;
 import com.laba.aboher.interfaces.*;
 import com.laba.aboher.models.*;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 //        homework2023oct30();
 //        homework2023nov2();
-        homework2023nov6();
+//        homework2023nov6();
+        try {
+            homework2023nov9();
+        } catch (InvalidHealthException ihe) {
+            System.out.println("Exception setting health: " + ihe);
+        }
     }
 
     private static void homework2023oct30() {
@@ -53,7 +61,11 @@ public class Main {
         jim.setStatus("Zoo");
         // coco has been injured in the capture process, a veterinarian will
         // heal him later.
-        coco.setHealth(30);
+        try {
+            coco.setHealth(30);
+        } catch (InvalidHealthException e) {
+            System.out.println("Exception setting health: " + e);
+        }
 
         System.out.println("""
 
@@ -63,8 +75,16 @@ public class Main {
         Riffle riffle = new Riffle(70);
         Hunter john = new Hunter("John", 40, riffle);
 
-        john.huntAnimal(susan); // susan is wild, it can be hunted
-        john.huntAnimal(coco);  // cooc is in the zoo, it can't be hunted
+        try {
+            john.huntAnimal(susan); // susan is wild, it can be hunted
+        } catch (NoWildAnimalException e) {
+            System.out.println("Exception: " + e);
+        }
+        try {
+            john.huntAnimal(coco);  // cooc is in the zoo, it can't be hunted
+        } catch (NoWildAnimalException e) {
+            System.out.println("Exception: " + e);
+        }
 
         System.out.println("""
 
@@ -111,7 +131,11 @@ public class Main {
 
         Capybara jim = new Capybara("Capybara", "Wild", 6);
         Capybara dummyJim = new Capybara("Capybara", "Wild", 6);
-        dummyJim.setHealth(75); // to test if the equals() method works properly
+        try {
+            dummyJim.setHealth(75); // to test if the equals() method works properly
+        } catch (InvalidHealthException e) {
+            System.out.println("Exception setting health: " + e);
+        }
 
         System.out.println("""
 
@@ -216,5 +240,97 @@ public class Main {
             carlie = new Cat("Bobcat", "Wild", 6);
             System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats());
         }
+    }
+
+    private static void homework2023nov9() throws InvalidHealthException {
+        Dog spike = new Dog("Golden Retriever", "Domestic", 6);
+
+        System.out.println("""
+                 \n\n\n                 
+                 ------------------------------------------------------------
+                 ------------------------------------------------------------
+                 Try with resources:
+                ------------------------------------------------------------""");
+//        Try with resource
+        int age = 0;
+        System.out.println("Enter the new age of Spike:");
+        try (Scanner sc = new Scanner(System.in)) {
+            age = sc.nextInt();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+
+        System.out.println("""
+                 \n\n\n                 
+                 ------------------------------------------------------------
+                 ------------------------------------------------------------
+                 InvalidAgeException TEST:
+                ------------------------------------------------------------""");
+        try {
+            spike.setAge(age);
+        } catch (InvalidAgeException iae) {
+            System.out.println("Exception setting age: " + iae);
+        }
+
+
+
+        System.out.println("""
+                 \n\n\n                 
+                 ------------------------------------------------------------
+                 ------------------------------------------------------------
+                 NoWildAnimalException TEST:
+                ------------------------------------------------------------""");
+
+        Lion susan = new Lion("Lion", "Wild", 6);
+
+        Riffle riffle = new Riffle(70);
+        Hunter john = new Hunter("John", 40, riffle);
+
+        try {
+            john.huntAnimal(susan); // susan is wild, it can be hunted
+        } catch (NoWildAnimalException e) {
+            System.out.println("Exception: " + e);
+        }
+        try {
+            john.huntAnimal(spike);  // spike is domestic, it can't be hunted
+        } catch (NoWildAnimalException e) {
+            System.out.println("Exception: " + e);
+        }
+
+        System.out.println("""
+                 \n\n\n
+                 ------------------------------------------------------------
+                 ------------------------------------------------------------
+                 InvalidHungerException TEST:
+                ------------------------------------------------------------""");
+
+        try {
+            spike.setHunger(105);
+        } catch (InvalidHungerException e) {
+            System.out.println("Exception: " + e);
+        }
+
+        System.out.println("""
+                 \n\n\n
+                 ------------------------------------------------------------
+                 ------------------------------------------------------------
+                 InvalidTirednessException TEST:
+                ------------------------------------------------------------""");
+
+        try {
+            spike.setTiredness(-5);
+        } catch (InvalidTirednessException e) {
+            System.out.println("Exception: " + e);
+        }
+
+        System.out.println("""
+                 \n\n\n
+                 ------------------------------------------------------------
+                 ------------------------------------------------------------
+                 InvalidHealthException TEST (this one is not
+                 dealt here, but is thrown to the calling method):
+                ------------------------------------------------------------""");
+//        pass the exception to the calling method
+        spike.setHealth(101);
     }
 }

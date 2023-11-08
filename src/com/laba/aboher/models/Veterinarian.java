@@ -1,5 +1,6 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.exceptions.InvalidHealthException;
 import com.laba.aboher.interfaces.IRun;
 
 public class Veterinarian extends Person implements IRun {
@@ -28,7 +29,11 @@ public class Veterinarian extends Person implements IRun {
             System.out.println("Syringe is not loaded! animal can't be healed");
             return;
         }
-        animal.setHealth(100);
+        try {
+            animal.setHealth(100);
+        } catch (InvalidHealthException e) {
+            System.out.println("Exception setting health: " + e);
+        }
         this.syringe.setLoaded(false);
         System.out.println("Animal has been healed!");
     }

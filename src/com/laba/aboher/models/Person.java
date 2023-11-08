@@ -1,5 +1,6 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.exceptions.InvalidAgeException;
 import com.laba.aboher.interfaces.IPet;
 import com.laba.aboher.interfaces.IRun;
 
@@ -20,7 +21,11 @@ public abstract class Person implements IPet {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age) throws InvalidAgeException {
+        if (age < 0) {
+            throw new InvalidAgeException(String.format("Invalid input age: " +
+                    "%d. Age can't be lower than zero", age));
+        }
         this.age = age;
     }
 

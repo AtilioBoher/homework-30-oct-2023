@@ -1,5 +1,6 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.exceptions.NoWildAnimalException;
 import com.laba.aboher.interfaces.IRun;
 
 public class Hunter extends Person implements IRun {
@@ -18,10 +19,11 @@ public class Hunter extends Person implements IRun {
         this.riffle = riffle;
     }
 
-    public void huntAnimal(Animal animal) {
+    public void huntAnimal(Animal animal) throws NoWildAnimalException {
         if (!animal.getStatus().equals("Wild")) {
-            System.out.println("Animal is not wild, it can't be hunted");
-            return;
+            throw new NoWildAnimalException(
+                    String.format("Animal status is: \"%s\". It must be \"Wild\" " +
+                            "to be hunted.", animal.getStatus()));
         }
         System.out.println("Animal: " + animal.getSpecie() + " has been hunted");
         animal.setStatus("Hunted");
