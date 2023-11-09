@@ -1,13 +1,17 @@
 package com.laba.aboher;
 
-
 import com.laba.aboher.exceptions.*;
 import com.laba.aboher.interfaces.*;
 import com.laba.aboher.models.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
 public class Main {
+
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     public static void main(String[] args) {
 //        homework2023oct30();
 //        homework2023nov2();
@@ -15,41 +19,41 @@ public class Main {
         try {
             homework2023nov9();
         } catch (InvalidHealthException ihe) {
-            System.out.println("Exception setting health: " + ihe);
+            LOGGER.debug("Exception setting health: " + ihe);
         }
     }
 
     private static void homework2023oct30() {
-        System.out.println("INDIVIDUAL ANIMAL TEST:\n" +
+        LOGGER.info("INDIVIDUAL ANIMAL TEST:\n" +
                 "------------------------------------------------------------");
-        System.out.println("\nDog:");
+        LOGGER.info("\nDog:");
         Dog firulais = new Dog("Golden Retriever", "Domestic",6);
         firulais.makeNoise();
         firulais.move();
 
-        System.out.println("\nCat:");
+        LOGGER.info("\nCat:");
         Cat carlie = new Cat("Bobcat", "Wild", 6);
         carlie.makeNoise();
         carlie.move();
 
-        System.out.println("\nLion:");
+        LOGGER.info("\nLion:");
         Lion susan = new Lion("Lion", "Wild", 6);
         susan.makeNoise();
         susan.move();
 
-        System.out.println("\nCrocodile:");
+        LOGGER.info("\nCrocodile:");
         Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
         coco.makeNoise();
         coco.move();
         coco.swim();
 
-        System.out.println("\nElephant:");
+        LOGGER.info("\nElephant:");
         // rupert is endangered, it can't be hunted
         Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
         rupert.makeNoise();
         rupert.move();
 
-        System.out.println("\nCapybara:");
+        LOGGER.info("\nCapybara:");
         Capybara jim = new Capybara("Capybara", "Wild", 6);
         jim.makeNoise();
         jim.move();
@@ -64,10 +68,10 @@ public class Main {
         try {
             coco.setHealth(30);
         } catch (InvalidHealthException e) {
-            System.out.println("Exception setting health: " + e);
+            LOGGER.debug("Exception setting health: " + e);
         }
 
-        System.out.println("""
+        LOGGER.info("""
 
                  HUNTER TEST:
                 ------------------------------------------------------------""");
@@ -78,15 +82,15 @@ public class Main {
         try {
             john.huntAnimal(susan); // susan is wild, it can be hunted
         } catch (NoWildAnimalException e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
         try {
             john.huntAnimal(coco);  // cooc is in the zoo, it can't be hunted
         } catch (NoWildAnimalException e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
 
-        System.out.println("""
+        LOGGER.info("""
 
                  VETERINARIAN TEST:
                 ------------------------------------------------------------""");
@@ -100,14 +104,14 @@ public class Main {
         michael.getSyringe().setLoaded(true);
         michael.healAnimal(coco);
 
-        System.out.println("""
+        LOGGER.info("""
 
                  USE OF ANIMAL ARRAY TEST:
                 ------------------------------------------------------------""");
 
         Animal[] animals = {firulais, carlie, susan, coco, rupert, jim};
         for (Animal animal : animals) {
-            System.out.println("\nAnimal: " + animal.getSpecie());
+            LOGGER.info("\nAnimal: " + animal.getSpecie());
             animal.makeNoise();
             animal.move();
         }
@@ -134,10 +138,10 @@ public class Main {
         try {
             dummyJim.setHealth(75); // to test if the equals() method works properly
         } catch (InvalidHealthException e) {
-            System.out.println("Exception setting health: " + e);
+            LOGGER.debug("Exception setting health: " + e);
         }
 
-        System.out.println("""
+        LOGGER.info("""
 
                  Example of use of polymorphism. Each Animal have its own
                  implementation of the method speak() and move() which
@@ -149,15 +153,15 @@ public class Main {
                 dummyCoco, dummyRupert, dummyJim};
         int i = 0;
         for (Animal animal : animals) {
-            System.out.println("\nCall animal.getSpecie(): " + animal.getSpecie());
+            LOGGER.info("\nCall animal.getSpecie(): " + animal.getSpecie());
             System.out.print("Call animal.speak(): ");
             animal.makeNoise();
             System.out.print("Call animal.move(): ");
             animal.move();
-            System.out.println("Call toString(): " + animal);
-            System.out.println("Call hashCode(): " + animal.hashCode());
-            System.out.println("Call dummyAnimal.hashCode(): " + dummyAnimals[i].hashCode());
-            System.out.println("Call animal.equals(dummyAnimal): " + animal.equals(dummyAnimals[i]));
+            LOGGER.info("Call toString(): " + animal);
+            LOGGER.info("Call hashCode(): " + animal.hashCode());
+            LOGGER.info("Call dummyAnimal.hashCode(): " + dummyAnimals[i].hashCode());
+            LOGGER.info("Call animal.equals(dummyAnimal): " + animal.equals(dummyAnimals[i]));
             i++;
         }
     }
@@ -180,7 +184,7 @@ public class Main {
         Syringe syringe = new Syringe();
         Veterinarian michael = new Veterinarian("Michael", 40, syringe);
 
-        System.out.println("""
+        LOGGER.info("""
 
                  Polymorphism was used in the previous home-task, in this block
                  we'll use interfaces. Lets start with IRun interface, which
@@ -191,7 +195,7 @@ public class Main {
             runner.run();
         }
 
-        System.out.println("""
+        LOGGER.info("""
                 ------------------------------------------------------------
                 ------------------------------------------------------------
                  IFly interface:
@@ -202,7 +206,7 @@ public class Main {
             flyer.fly();
         }
 
-        System.out.println("""
+        LOGGER.info("""
                 ------------------------------------------------------------
                 ------------------------------------------------------------
                  IPet interface:
@@ -217,7 +221,7 @@ public class Main {
             i++;
         }
 
-        System.out.println("""
+        LOGGER.info("""
                 ------------------------------------------------------------
                 ------------------------------------------------------------
                  IKillPrey interface:
@@ -228,58 +232,44 @@ public class Main {
             hunter.killPray();
         }
 
-        System.out.println("""
+        LOGGER.info("""
                 ------------------------------------------------------------
                 ------------------------------------------------------------
                  Test static field:
                  
                 """);
-        System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats() +
+        LOGGER.info("Cats instantiated till now: " + Cat.getNumberOfCats() +
                 "\nI'll instantiate some more:");
         for (i = 0; i < 5; i++) {
             carlie = new Cat("Bobcat", "Wild", 6);
-            System.out.println("Cats instantiated till now: " + Cat.getNumberOfCats());
+            LOGGER.info("Cats instantiated till now: " + Cat.getNumberOfCats());
         }
     }
 
     private static void homework2023nov9() throws InvalidHealthException {
         Dog spike = new Dog("Golden Retriever", "Domestic", 6);
 
-        System.out.println("""
-                 \n\n\n                 
-                 ------------------------------------------------------------
-                 ------------------------------------------------------------
-                 Try with resources:
-                ------------------------------------------------------------""");
+        LOGGER.info("---------------------Try with resources:--------------------");
 //        Try with resource
         int age = 0;
-        System.out.println("Enter the new age of Spike:");
+        LOGGER.info("Enter the new age of Spike:");
         try (Scanner sc = new Scanner(System.in)) {
             age = sc.nextInt();
         } catch (Exception e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
 
-        System.out.println("""
-                 \n\n\n                 
-                 ------------------------------------------------------------
-                 ------------------------------------------------------------
-                 InvalidAgeException TEST:
-                ------------------------------------------------------------""");
+        LOGGER.info("-------------------InvalidAgeException TEST:----------------");
         try {
             spike.setAge(age);
+            LOGGER.debug("Everything went fine");
         } catch (InvalidAgeException iae) {
-            System.out.println("Exception setting age: " + iae);
+            LOGGER.debug("Exception setting age: " + iae);
         }
 
 
 
-        System.out.println("""
-                 \n\n\n                 
-                 ------------------------------------------------------------
-                 ------------------------------------------------------------
-                 NoWildAnimalException TEST:
-                ------------------------------------------------------------""");
+        LOGGER.info("-----------------NoWildAnimalException TEST:---------------");
 
         Lion susan = new Lion("Lion", "Wild", 6);
 
@@ -289,47 +279,32 @@ public class Main {
         try {
             john.huntAnimal(susan); // susan is wild, it can be hunted
         } catch (NoWildAnimalException e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
         try {
             john.huntAnimal(spike);  // spike is domestic, it can't be hunted
         } catch (NoWildAnimalException e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
 
-        System.out.println("""
-                 \n\n\n
-                 ------------------------------------------------------------
-                 ------------------------------------------------------------
-                 InvalidHungerException TEST:
-                ------------------------------------------------------------""");
+        LOGGER.info("------------------InvalidHungerException TEST:--------------");
 
         try {
             spike.setHunger(105);
         } catch (InvalidHungerException e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
 
-        System.out.println("""
-                 \n\n\n
-                 ------------------------------------------------------------
-                 ------------------------------------------------------------
-                 InvalidTirednessException TEST:
-                ------------------------------------------------------------""");
+        LOGGER.info("----------------InvalidTirednessException TEST:-------------");
 
         try {
             spike.setTiredness(-5);
         } catch (InvalidTirednessException e) {
-            System.out.println("Exception: " + e);
+            LOGGER.debug("Exception: " + e);
         }
 
-        System.out.println("""
-                 \n\n\n
-                 ------------------------------------------------------------
-                 ------------------------------------------------------------
-                 InvalidHealthException TEST (this one is not
-                 dealt here, but is thrown to the calling method):
-                ------------------------------------------------------------""");
+        LOGGER.info("--------InvalidHealthException TEST (this one is not " +
+                    "dealt here, but is thrown to the calling method):-----");
 //        pass the exception to the calling method
         spike.setHealth(101);
     }

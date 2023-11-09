@@ -1,11 +1,16 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.Main;
 import com.laba.aboher.interfaces.IKillPrey;
 import com.laba.aboher.interfaces.IRun;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public class Lion extends Animal implements IRun, IKillPrey {
+
+    private static final Logger LOGGER = LogManager.getLogger(Lion.class);
     protected int aggressiveness; // percent level of the lion's aggressiveness
 
     public Lion(String specie, String status, int age) {
@@ -19,7 +24,7 @@ public class Lion extends Animal implements IRun, IKillPrey {
 
     public void setAggressiveness(int aggressiveness) {
         if (aggressiveness < 0 || aggressiveness > 100) {
-            System.out.println("invalid level of aggressiveness");
+            LOGGER.debug("invalid level of aggressiveness");
             return;
         }
         this.aggressiveness = aggressiveness;
@@ -27,12 +32,12 @@ public class Lion extends Animal implements IRun, IKillPrey {
 
     @Override
     public void makeNoise() {
-        System.out.println("Graaaauuu!!!.");
+        LOGGER.info("Graaaauuu!!!.");
     }
 
     @Override
     public void move() {
-        System.out.println("Lion moves");
+        LOGGER.info("Lion moves");
     }
 
     @Override
@@ -67,12 +72,12 @@ public class Lion extends Animal implements IRun, IKillPrey {
 
     @Override
     public void run() {
-        System.out.println("Lion runs...");
+        LOGGER.info("Lion runs...");
     }
 
     @Override
     public void killPray() {
-        System.out.println("I'm a Lion, and I've killed a prey to eat");
+        LOGGER.info("I'm a Lion, and I've killed a prey to eat");
     }
 
 }

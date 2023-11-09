@@ -1,11 +1,15 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.Main;
 import com.laba.aboher.interfaces.IFly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public final class Nightingale extends Animal implements IFly {
 
+    private static final Logger LOGGER = LogManager.getLogger(Nightingale.class);
 
     public Nightingale(String specie, String status, int age) {
         super(specie, status, age);
@@ -13,17 +17,17 @@ public final class Nightingale extends Animal implements IFly {
 
     @Override
     public void makeNoise() {
-        System.out.println("Nightingale sings...");
+        LOGGER.info("Nightingale sings...");
     }
 
     @Override
     public void move() {
-        System.out.println("Nightingale moves...");
+        LOGGER.info("Nightingale moves...");
     }
 
     @Override
     public void fly() {
-        System.out.println("Nightingale flies...");
+        LOGGER.info("Nightingale flies...");
     }
 
     @Override

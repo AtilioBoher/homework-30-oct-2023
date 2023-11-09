@@ -1,10 +1,15 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.Main;
 import com.laba.aboher.interfaces.IRun;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public class Elephant extends Animal implements IRun {
+
+    private static final Logger LOGGER = LogManager.getLogger(Elephant.class);
 
     protected int aggressiveness; // percent level of the elephant's aggressiveness
 
@@ -19,7 +24,7 @@ public class Elephant extends Animal implements IRun {
 
     public void setAggressiveness(int aggressiveness) {
         if (aggressiveness < 0 || aggressiveness > 100) {
-            System.out.println("invalid level of aggressiveness");
+            LOGGER.debug("invalid level of aggressiveness");
             return;
         }
         this.aggressiveness = aggressiveness;
@@ -27,12 +32,12 @@ public class Elephant extends Animal implements IRun {
 
     @Override
     public void makeNoise() {
-        System.out.println("Fiiiuuuuuuuuuuuu!!!.");
+        LOGGER.info("Fiiiuuuuuuuuuuuu!!!.");
     }
 
     @Override
     public void move() {
-        System.out.println("Elephant moves");
+        LOGGER.info("Elephant moves");
     }
 
     @Override
@@ -67,6 +72,6 @@ public class Elephant extends Animal implements IRun {
 
     @Override
     public void run() {
-        System.out.println("Elephant runs...");
+        LOGGER.info("Elephant runs...");
     }
 }

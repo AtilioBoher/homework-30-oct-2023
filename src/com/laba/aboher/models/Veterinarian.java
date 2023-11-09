@@ -1,9 +1,14 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.Main;
 import com.laba.aboher.exceptions.InvalidHealthException;
 import com.laba.aboher.interfaces.IRun;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Veterinarian extends Person implements IRun {
+
+    private static final Logger LOGGER = LogManager.getLogger(Veterinarian.class);
     private Syringe syringe;
 
     public Veterinarian(String name, int age,Syringe syringe) {
@@ -21,25 +26,25 @@ public class Veterinarian extends Person implements IRun {
 
     public void healAnimal(Animal animal) {
         if (animal.getHealth() > 50) {
-            System.out.println("Animal's health is greater than 50%, it doesn't" +
+            LOGGER.info("Animal's health is greater than 50%, it doesn't" +
                     " need to be healed yet");
             return;
         }
         if (!this.syringe.isLoaded()) {
-            System.out.println("Syringe is not loaded! animal can't be healed");
+            LOGGER.info("Syringe is not loaded! animal can't be healed");
             return;
         }
         try {
             animal.setHealth(100);
         } catch (InvalidHealthException e) {
-            System.out.println("Exception setting health: " + e);
+            LOGGER.debug("Exception setting health: " + e);
         }
         this.syringe.setLoaded(false);
-        System.out.println("Animal has been healed!");
+        LOGGER.info("Animal has been healed!");
     }
 
     @Override
     public void run() {
-        System.out.println("Veterinarian runs...");
+        LOGGER.info("Veterinarian runs...");
     }
 }

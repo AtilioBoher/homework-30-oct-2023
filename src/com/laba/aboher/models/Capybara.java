@@ -1,10 +1,14 @@
 package com.laba.aboher.models;
 
 import com.laba.aboher.interfaces.IRun;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public class Capybara extends Animal implements IRun {
+
+    private static final Logger LOGGER = LogManager.getLogger(Capybara.class);
 
     protected int cuteness;    // percent level of the capybara's cuteness
                             // we have a lot of those here in Argentina,
@@ -21,7 +25,7 @@ public class Capybara extends Animal implements IRun {
 
     public void setHappiness(int cuteness) {
         if (cuteness < 0 || cuteness > 100) {
-            System.out.println("invalid level of cuteness");
+            LOGGER.debug("invalid level of cuteness");
             return;
         }
         this.cuteness = cuteness;
@@ -29,12 +33,12 @@ public class Capybara extends Animal implements IRun {
 
     @Override
     public void makeNoise() {
-        System.out.println("Huff, huff.");
+        LOGGER.info("Huff, huff.");
     }
 
     @Override
     public void move() {
-        System.out.println("Capybara moves");
+        LOGGER.info("Capybara moves");
     }
 
     @Override
@@ -69,6 +73,6 @@ public class Capybara extends Animal implements IRun {
 
     @Override
     public void run() {
-        System.out.println("Capybara runs...");
+        LOGGER.info("Capybara runs...");
     }
 }

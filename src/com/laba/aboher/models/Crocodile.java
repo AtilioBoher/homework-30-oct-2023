@@ -2,10 +2,14 @@ package com.laba.aboher.models;
 
 import com.laba.aboher.interfaces.IKillPrey;
 import com.laba.aboher.interfaces.IRun;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public class Crocodile extends Animal implements IRun, IKillPrey {
+
+    private static final Logger LOGGER = LogManager.getLogger(Crocodile.class);
 
     protected int aggressiveness; // percent level of the crocodile's aggressiveness
 
@@ -20,7 +24,7 @@ public class Crocodile extends Animal implements IRun, IKillPrey {
 
     public void setAggressiveness(int aggressiveness) {
         if (aggressiveness < 0 || aggressiveness > 100) {
-            System.out.println("invalid level of aggressiveness");
+            LOGGER.debug("invalid level of aggressiveness");
             return;
         }
         this.aggressiveness = aggressiveness;
@@ -28,16 +32,16 @@ public class Crocodile extends Animal implements IRun, IKillPrey {
 
     @Override
     public void makeNoise() {
-        System.out.println("Grrrrrrrr!!!.");
+        LOGGER.info("Grrrrrrrr!!!.");
     }
 
     @Override
     public void move() {
-        System.out.println("Crocodile moves");
+        LOGGER.info("Crocodile moves");
     }
 
     public void swim() {
-        System.out.println("Crocodile swims");
+        LOGGER.info("Crocodile swims");
     }
 
     @Override
@@ -72,11 +76,11 @@ public class Crocodile extends Animal implements IRun, IKillPrey {
 
     @Override
     public void run() {
-        System.out.println("Crocodile runs...");
+        LOGGER.info("Crocodile runs...");
     }
 
     @Override
     public void killPray() {
-        System.out.println("I'm a Crocodile, and I've killed a prey to eat");
+        LOGGER.info("I'm a Crocodile, and I've killed a prey to eat");
     }
 }

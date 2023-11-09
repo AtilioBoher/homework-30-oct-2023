@@ -1,11 +1,16 @@
 package com.laba.aboher.models;
 
+import com.laba.aboher.Main;
 import com.laba.aboher.interfaces.IRun;
 import com.laba.aboher.interfaces.Pettable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public class Dog extends Animal implements IRun, Pettable {
+
+    private static final Logger LOGGER = LogManager.getLogger(Dog.class);
 
     protected int happiness; // percent level of the dog happiness
 
@@ -20,7 +25,7 @@ public class Dog extends Animal implements IRun, Pettable {
 
     public void setHappiness(int happiness) {
         if (happiness < 0 || happiness > 100) {
-            System.out.println("invalid level of happiness");
+            LOGGER.debug("invalid level of happiness");
             return;
         }
         this.happiness = happiness;
@@ -28,12 +33,12 @@ public class Dog extends Animal implements IRun, Pettable {
 
     @Override
     public void makeNoise() {
-        System.out.println("Woof, woof.");
+        LOGGER.info("Woof, woof.");
     }
 
     @Override
     public void move() {
-        System.out.println("Dog moves");
+        LOGGER.info("Dog moves");
     }
 
     @Override
@@ -68,12 +73,12 @@ public class Dog extends Animal implements IRun, Pettable {
 
     @Override
     public void run() {
-        System.out.println("Dog runs...");
+        LOGGER.info("Dog runs...");
     }
 
     @Override
     public void letHimSelfBePet() {
-        System.out.println("I'm being petted, I'm happy and wag my tail...!!!");
+        LOGGER.info("I'm being petted, I'm happy and wag my tail...!!!");
         setHappiness(100);
     }
 }

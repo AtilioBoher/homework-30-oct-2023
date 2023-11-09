@@ -1,31 +1,36 @@
 package com.laba.aboher.models;
 
 import com.laba.aboher.interfaces.IFly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public final class Eagle extends Animal implements IFly {
+
+    private static final Logger LOGGER = LogManager.getLogger(Eagle.class);
+    
     public Eagle(String specie, String status, int age) {
         super(specie, status, age);
     }
 
     static {
-        System.out.println("Creating an eagle: String from static block");
+        LOGGER.info("Creating an eagle: String from static block");
     }
 
     @Override
     public void makeNoise() {
-        System.out.println("Eagle screams...");
+        LOGGER.info("Eagle screams...");
     }
 
     @Override
     public void move() {
-        System.out.println("Eagle moves...");
+        LOGGER.info("Eagle moves...");
     }
 
     @Override
     public void fly() {
-        System.out.println("Eagle flies...");
+        LOGGER.info("Eagle flies...");
     }
 
     @Override
