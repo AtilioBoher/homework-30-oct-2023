@@ -30,3 +30,6 @@ bin/
 
 ### Log folder ###
 logs
+
+### External libraries ###
+lib
