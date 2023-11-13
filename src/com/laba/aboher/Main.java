@@ -334,7 +334,7 @@ public class Main {
 
                  ------------------IRun ArrayList--------------------
                 """);
-        ArrayList<IRun> runners = new ArrayList<>();
+        List<IRun> runners = new ArrayList<>();
         runners.add(firulais);
         runners.add(carlie);
         runners.add(carlie); // I can add duplicates
@@ -348,7 +348,7 @@ public class Main {
 
                  ------------------Animal LinkedList--------------------
                 """);
-        LinkedList<Animal> animals = new LinkedList<>();
+        List<Animal> animals = new LinkedList<>();
         animals.add(firulais);
         animals.add(carlie);
         animals.add(carlie); // I can add duplicates
@@ -361,7 +361,7 @@ public class Main {
 
                  ------------------IFly HashSet--------------------
                 """);
-        HashSet<IFly> flyers = new HashSet<>();
+        Set<IFly> flyers = new HashSet<>();
         flyers.add(jeremy);
         flyers.add(rose);
         flyers.add(rose); // I can't add duplicates. There will be only two elements on the set
@@ -373,10 +373,10 @@ public class Main {
 
                  --------------IPet and Pettable ArrayList---------------
                 """);
-        ArrayList<IPet> petters = new ArrayList<>();
+        List<IPet> petters = new ArrayList<>();
         petters.add(john);
         petters.add(michael);
-        ArrayList<Pettable> pettables = new ArrayList<>();
+        List<Pettable> pettables = new ArrayList<>();
         pettables.add(firulais);
         pettables.add(carlie);
 
