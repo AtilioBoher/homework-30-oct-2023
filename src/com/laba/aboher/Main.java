@@ -1,12 +1,13 @@
 package com.laba.aboher;
 
+import com.laba.aboher.custom.CustomLinkedList;
 import com.laba.aboher.exceptions.*;
 import com.laba.aboher.interfaces.*;
 import com.laba.aboher.models.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -16,11 +17,13 @@ public class Main {
 //        homework2023oct30();
 //        homework2023nov2();
 //        homework2023nov6();
-        try {
-            homework2023nov9();
-        } catch (InvalidHealthException ihe) {
-            LOGGER.debug("Exception setting health: " + ihe);
-        }
+//        try {
+//            homework2023nov9();
+//        } catch (InvalidHealthException ihe) {
+//            LOGGER.debug("Exception setting health: " + ihe);
+//        }
+        homework2023nov13();
+
     }
 
     private static void homework2023oct30() {
@@ -308,4 +311,107 @@ public class Main {
 //        pass the exception to the calling method
         spike.setHealth(101);
     }
+
+    private static void homework2023nov13() {
+        // Animals
+        Dog firulais = new Dog("Golden Retriever", "Domestic", 6);
+        Cat carlie = new Cat("Bobcat", "Wild", 6);
+        Lion susan = new Lion("Lion", "Wild", 6);
+        Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
+        Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
+        Capybara jim = new Capybara("Capybara", "Wild", 6);
+        Eagle jeremy = new Eagle("Eagle","Wild", 6);
+        Nightingale rose = new Nightingale("Nightingale","Wild", 6);
+        // Humans
+        // Hunter
+        Riffle riffle = new Riffle(70);
+        Hunter john = new Hunter("John", 40, riffle);
+        // Veterinarian
+        Syringe syringe = new Syringe();
+        Veterinarian michael = new Veterinarian("Michael", 40, syringe);
+
+        LOGGER.info("""
+
+                 ------------------IRun ArrayList--------------------
+                """);
+        ArrayList<IRun> runners = new ArrayList<>();
+        runners.add(firulais);
+        runners.add(carlie);
+        runners.add(carlie); // I can add duplicates
+        runners.add(susan);
+        runners.add(michael);
+        for (IRun runner : runners) {
+            runner.run();
+        }
+
+        LOGGER.info("""
+
+                 ------------------Animal LinkedList--------------------
+                """);
+        LinkedList<Animal> animals = new LinkedList<>();
+        animals.add(firulais);
+        animals.add(carlie);
+        animals.add(carlie); // I can add duplicates
+        animals.add(susan);
+        for (Animal animal : animals) {
+            animal.move();
+        }
+
+        LOGGER.info("""
+
+                 ------------------IFly HashSet--------------------
+                """);
+        HashSet<IFly> flyers = new HashSet<>();
+        flyers.add(jeremy);
+        flyers.add(rose);
+        flyers.add(rose); // I can't add duplicates. There will be only two elements on the set
+        for (IFly flyer : flyers) {
+            flyer.fly();
+        }
+
+        LOGGER.info("""
+
+                 --------------IPet and Pettable ArrayList---------------
+                """);
+        ArrayList<IPet> petters = new ArrayList<>();
+        petters.add(john);
+        petters.add(michael);
+        ArrayList<Pettable> pettables = new ArrayList<>();
+        pettables.add(firulais);
+        pettables.add(carlie);
+
+        int i = 0;
+        for(IPet petter : petters) {
+            petter.pet(pettables.get(i));
+            i++;
+        }
+
+        LOGGER.info("""
+
+                 --------------------CustomLInkedList-------------------------
+                 Code was taken from:
+                 https://www.geeksforgeeks.org/how-to-implement-generic-linkedlist-in-java/
+                 I did a little bit of refactoring, changing names and access
+                 modifiers to put the classes in different files. I also
+                 made the CustomLinkedList implement iterable by adding the
+                 helper classes and methods that were needed; I've taken those
+                 from this source:
+                 https://www.geeksforgeeks.org/java-implementing-iterator-and-iterable-interface/
+                """);
+        CustomLinkedList<Animal> customList = new CustomLinkedList<>();
+        customList.add(firulais);
+        customList.add(carlie);
+        customList.add(carlie); // I can add duplicates
+        customList.add(susan);
+        customList.remove(carlie); // I remove the extra cat
+
+        LOGGER.info("CustomArreyList length: " + customList.length() + "\n");
+        LOGGER.info("CustomArreyList toString() method: " + customList + "\n");
+
+        LOGGER.info("CustomArreyList used in a For Each Loop: ");
+        for (Animal element : customList) {
+            element.move();
+        }
+    }
+
 }
