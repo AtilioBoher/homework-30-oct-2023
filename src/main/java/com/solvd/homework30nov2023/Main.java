@@ -4,10 +4,16 @@ import com.solvd.homework30nov2023.custom.CustomLinkedList;
 import com.solvd.homework30nov2023.exceptions.*;
 import com.solvd.homework30nov2023.interfaces.*;
 import com.solvd.homework30nov2023.models.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Main {
 
@@ -22,8 +28,8 @@ public class Main {
 //        } catch (InvalidHealthException ihe) {
 //            LOGGER.debug("Exception setting health: " + ihe);
 //        }
-        homework2023nov13();
-
+//        homework2023nov13();
+        homework2034nov21();
     }
 
     private static void homework2023oct30() {
@@ -414,4 +420,55 @@ public class Main {
         }
     }
 
+    private static void homework2034nov21() {
+        File inputFile = new File("src/main/resources/text.txt");
+        File outputFile = new File("src/main/resources/count.txt");
+
+        List<String> lines = null;
+        try {
+            lines = FileUtils.readLines(inputFile);
+        } catch (IOException e) {
+            LOGGER.error("Exception: " + e);
+        }
+
+        String text;
+        if(lines != null){
+            text = String.join(", ", lines);
+        } else {
+            text = "default string";
+        }
+
+        text = text.replaceAll("[^A-Za-z ]", ""); // leave only words
+        text = text.trim().replaceAll(" +", " "); // leave only unique space between words
+
+        String[] words = StringUtils.split(text, " ");
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String word : words) {
+            if (map.containsKey(word)) {
+                int count = map.get(word);
+                map.put(word, ++count);
+            } else {
+                map.put(word, 1);
+            }
+        }
+
+        try {
+            FileUtils.delete(outputFile);
+        } catch (IOException e) {
+            LOGGER.error("Exception: " + e);
+        }
+//
+        for (Entry<String, Integer> a: map.entrySet()) {
+            try {
+                FileUtils.writeStringToFile(
+                        outputFile,
+                        a.getKey() + " " + a.getValue() + "\n",
+                        Charset.defaultCharset(),
+                        true);
+            } catch (IOException e) {
+                LOGGER.error("Exception: " + e);
+            }
+        }
+    }
 }
