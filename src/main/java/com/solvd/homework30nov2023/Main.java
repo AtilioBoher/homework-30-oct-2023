@@ -29,7 +29,7 @@ public class Main {
 //            LOGGER.debug("Exception setting health: " + ihe);
 //        }
 //        homework2023nov13();
-        homework2034nov21();
+        homework2034nov23();
     }
 
     private static void homework2023oct30() {
@@ -420,7 +420,7 @@ public class Main {
         }
     }
 
-    private static void homework2034nov21() {
+    private static void homework2034nov23() {
         File inputFile = new File("src/main/resources/text.txt");
         File outputFile = new File("src/main/resources/count.txt");
 
