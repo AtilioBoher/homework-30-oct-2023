@@ -33,3 +33,6 @@ logs
 
 ### External libraries ###
 lib
+
+### target folder ###
+target
