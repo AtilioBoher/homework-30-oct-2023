@@ -9,7 +9,7 @@ import java.util.Objects;
 public final class Eagle extends Animal implements IFly {
 
     private static final Logger LOGGER = LogManager.getLogger(Eagle.class);
-    
+
     public Eagle(String specie, String status, int age) {
         super(specie, status, age);
     }

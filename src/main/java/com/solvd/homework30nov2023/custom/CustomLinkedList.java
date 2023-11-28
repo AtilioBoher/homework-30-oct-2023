@@ -16,21 +16,18 @@ class Node<T> {
     Node<T> next;
 
     // Parameterized constructor to assign value
-    Node(T data)
-    {
+    Node(T data) {
 
         // This keyword refers to current object itself
         this.data = data;
         this.next = null;
     }
 
-    public T getData()
-    {
+    public T getData() {
         return data;
     }
 
-    public Node<T> getNext()
-    {
+    public Node<T> getNext() {
         return next;
     }
 }
@@ -45,11 +42,13 @@ public class CustomLinkedList<T> implements Iterable<T> {
     private int length = 0;
 
     // Default constructor
-    public CustomLinkedList() { this.head = null; }
+    public CustomLinkedList() {
+        this.head = null;
+    }
+
     // Method
     // To add node at the end of List
-    public void add(T data)
-    {
+    public void add(T data) {
 
         // Creating new node with given value
         Node<T> temp = new Node<>(data);
@@ -80,15 +79,13 @@ public class CustomLinkedList<T> implements Iterable<T> {
     }
 
     // return Head
-    Node<T> getHead()
-    {
+    Node<T> getHead() {
         return head;
     }
 
     // Method
     // To add new node at any given position
-    public void add(int position, T data)
-    {
+    public void add(int position, T data) {
 
         // Checking if position is valid
         if (position > length + 1) {
@@ -135,10 +132,10 @@ public class CustomLinkedList<T> implements Iterable<T> {
         // new value now points to former current node
         prev.next.next = temp;
     }
+
     // Method
     // To remove a node from list
-    public void remove(T key)
-    {
+    public void remove(T key) {
 
         //  NOTE
         // dummy node is used to represent the node before
@@ -236,8 +233,7 @@ public class CustomLinkedList<T> implements Iterable<T> {
 
     // Method
     // To clear the entire LinkedList
-    public void clear()
-    {
+    public void clear() {
 
         // Head now points to null
         head = null;
@@ -247,8 +243,7 @@ public class CustomLinkedList<T> implements Iterable<T> {
 
     // Method
     // Returns whether List is empty or not
-    public boolean empty()
-    {
+    public boolean empty() {
 
         // Checking if head node points to null
         if (head == null) {
@@ -256,15 +251,17 @@ public class CustomLinkedList<T> implements Iterable<T> {
         }
         return false;
     }
+
     // Method
     // Returning the length of LinkedList
-    public int length() { return this.length; }
+    public int length() {
+        return this.length;
+    }
 
     // Method
     // To display the LinkedList
     // @Override
-    public String toString()
-    {
+    public String toString() {
 
         String S = "{ ";
 
@@ -281,9 +278,9 @@ public class CustomLinkedList<T> implements Iterable<T> {
         S += String.valueOf(X.data);
         return S + " }";
     }
+
     // return Iterator instance
-    public Iterator<T> iterator()
-    {
+    public Iterator<T> iterator() {
         return new ListIterator<T>(this);
     }
 }
@@ -292,28 +289,24 @@ class ListIterator<T> implements Iterator<T> {
     Node<T> current;
 
     // initialize pointer to head of the list for iteration
-    public ListIterator(CustomLinkedList<T> list)
-    {
+    public ListIterator(CustomLinkedList<T> list) {
         current = list.getHead();
     }
 
     // returns false if next element does not exist
-    public boolean hasNext()
-    {
+    public boolean hasNext() {
         return current != null;
     }
 
     // return current data and update pointer
-    public T next()
-    {
+    public T next() {
         T data = current.getData();
         current = current.getNext();
         return data;
     }
 
     // implement if needed
-    public void remove()
-    {
+    public void remove() {
         throw new UnsupportedOperationException();
     }
 }

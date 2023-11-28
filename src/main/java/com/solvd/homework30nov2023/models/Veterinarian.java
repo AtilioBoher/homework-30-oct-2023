@@ -10,7 +10,7 @@ public class Veterinarian extends Person implements IRun {
     private static final Logger LOGGER = LogManager.getLogger(Veterinarian.class);
     private Syringe syringe;
 
-    public Veterinarian(String name, int age,Syringe syringe) {
+    public Veterinarian(String name, int age, Syringe syringe) {
         super("Veterinarian", name, age);
         this.syringe = syringe;
     }

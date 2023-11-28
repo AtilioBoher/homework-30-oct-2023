@@ -10,7 +10,7 @@ public class Hunter extends Person implements IRun {
     private static final Logger LOGGER = LogManager.getLogger(Hunter.class);
     private Riffle riffle;
 
-    public Hunter(String name, int age,Riffle riffle) {
+    public Hunter(String name, int age, Riffle riffle) {
         super("Hunter", name, age);
         this.riffle = riffle;
     }

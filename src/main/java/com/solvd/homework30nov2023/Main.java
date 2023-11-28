@@ -36,7 +36,7 @@ public class Main {
         LOGGER.info("INDIVIDUAL ANIMAL TEST:\n" +
                 "------------------------------------------------------------");
         LOGGER.info("\nDog:");
-        Dog firulais = new Dog("Golden Retriever", "Domestic",6);
+        Dog firulais = new Dog("Golden Retriever", "Domestic", 6);
         firulais.makeNoise();
         firulais.move();
 
@@ -183,8 +183,8 @@ public class Main {
         Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
         Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
         Capybara jim = new Capybara("Capybara", "Wild", 6);
-        Eagle jeremy = new Eagle("Eagle","Wild", 6);
-        Nightingale rose = new Nightingale("Nightingale","Wild", 6);
+        Eagle jeremy = new Eagle("Eagle", "Wild", 6);
+        Nightingale rose = new Nightingale("Nightingale", "Wild", 6);
         // Humans
         // Hunter
         Riffle riffle = new Riffle(70);
@@ -225,7 +225,7 @@ public class Main {
         IPet[] petters = {john, michael};
         Pettable[] pettables = {firulais, carlie};
         int i = 0;
-        for(IPet petter : petters) {
+        for (IPet petter : petters) {
             petter.pet(pettables[i]);
             i++;
         }
@@ -237,7 +237,7 @@ public class Main {
                  
                 """);
         IKillPrey[] hunters = {susan, coco};
-        for(IKillPrey hunter : hunters) {
+        for (IKillPrey hunter : hunters) {
             hunter.killPray();
         }
 
@@ -277,7 +277,6 @@ public class Main {
         }
 
 
-
         LOGGER.info("-----------------NoWildAnimalException TEST:---------------");
 
         Lion susan = new Lion("Lion", "Wild", 6);
@@ -313,7 +312,7 @@ public class Main {
         }
 
         LOGGER.info("--------InvalidHealthException TEST (this one is not " +
-                    "dealt here, but is thrown to the calling method):-----");
+                "dealt here, but is thrown to the calling method):-----");
 //        pass the exception to the calling method
         spike.setHealth(101);
     }
@@ -326,8 +325,8 @@ public class Main {
         Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
         Elephant rupert = new Elephant("Asian Elephant", "Endangered", 6);
         Capybara jim = new Capybara("Capybara", "Wild", 6);
-        Eagle jeremy = new Eagle("Eagle","Wild", 6);
-        Nightingale rose = new Nightingale("Nightingale","Wild", 6);
+        Eagle jeremy = new Eagle("Eagle", "Wild", 6);
+        Nightingale rose = new Nightingale("Nightingale", "Wild", 6);
         // Humans
         // Hunter
         Riffle riffle = new Riffle(70);
@@ -387,7 +386,7 @@ public class Main {
         pettables.add(carlie);
 
         int i = 0;
-        for(IPet petter : petters) {
+        for (IPet petter : petters) {
             petter.pet(pettables.get(i));
             i++;
         }
@@ -432,7 +431,7 @@ public class Main {
         }
 
         String text;
-        if(lines != null){
+        if (lines != null) {
             text = String.join(", ", lines);
         } else {
             text = "default string";
@@ -459,7 +458,7 @@ public class Main {
             LOGGER.error("Exception: " + e);
         }
 //
-        for (Entry<String, Integer> a: map.entrySet()) {
+        for (Entry<String, Integer> a : map.entrySet()) {
             try {
                 FileUtils.writeStringToFile(
                         outputFile,

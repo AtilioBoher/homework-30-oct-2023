@@ -9,10 +9,10 @@ public abstract class Animal {
 
     private int age;
     private final String SPECIE;  // specie the animal belongs, for example: dog, cat,
-                            // lion, snake.
+    // lion, snake.
     private String status;  // it could be Domestic, Wild (meaning that is in
-                            // the wild), Zoo (meaning that is in the zoo),
-                            // Endangered (in danger of extinction)
+    // the wild), Zoo (meaning that is in the zoo),
+    // Endangered (in danger of extinction)
     protected int health;     // percent level of health
 
     private int hunger;     // percent level of hunger
@@ -43,7 +43,7 @@ public abstract class Animal {
     public final String getSpecie() { // this field does not have a setter because
         return this.SPECIE;     // is a final field, meaning that an animal
     }                           // can't change the specie it belongs, it's only
-                                // defined in the constructor
+    // defined in the constructor
 
     public String getStatus() {
         return this.status;
@@ -62,7 +62,7 @@ public abstract class Animal {
             throw new InvalidHealthException(String.format("Invalid health: " +
                     "%d. Health can not be lower than 0.", health));
         }
-        if(health > 100) {
+        if (health > 100) {
             throw new InvalidHealthException(String.format("Invalid health: " +
                     "%d. Health can not be greater than 100.", health));
         }
@@ -79,7 +79,7 @@ public abstract class Animal {
                             "hunger level: %d. Hunger can not be lower than 0.",
                     hunger));
         }
-        if(hunger > 100) {
+        if (hunger > 100) {
             throw new InvalidHungerException(String.format("Invalid hunger " +
                             "level: %d. Hunger can not be greater than 100.",
                     hunger));
@@ -94,18 +94,19 @@ public abstract class Animal {
     public void setTiredness(int tiredness) throws InvalidTirednessException {
         if (tiredness < 0) {
             throw new InvalidTirednessException(String.format("Invalid " +
-                    "tiredness level: %d. Tiredness can not be lower than 0.",
+                            "tiredness level: %d. Tiredness can not be lower than 0.",
                     tiredness));
         }
-        if(tiredness > 100) {
+        if (tiredness > 100) {
             throw new InvalidTirednessException(String.format("Invalid" +
-                    "tiredness level: %d. Tiredness can not be greater than 100.",
+                            "tiredness level: %d. Tiredness can not be greater than 100.",
                     tiredness));
         }
         this.tiredness = tiredness;
     }
 
     public abstract void makeNoise();
+
     public abstract void move();
 
     @Override

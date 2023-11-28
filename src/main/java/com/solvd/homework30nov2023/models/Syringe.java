@@ -4,7 +4,7 @@ public class Syringe {
 
     private boolean loaded;
 
-    public  Syringe() {
+    public Syringe() {
         loaded = true;
     }
 

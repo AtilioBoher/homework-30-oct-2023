@@ -11,8 +11,8 @@ public class Capybara extends Animal implements IRun {
     private static final Logger LOGGER = LogManager.getLogger(Capybara.class);
 
     protected int cuteness;    // percent level of the capybara's cuteness
-                            // we have a lot of those here in Argentina,
-                            // A friend of my have one as a pets.
+    // we have a lot of those here in Argentina,
+    // A friend of my have one as a pets.
 
     public Capybara(String specie, String status, int age) {
         super(specie, status, age);

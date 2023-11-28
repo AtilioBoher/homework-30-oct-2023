@@ -24,7 +24,7 @@ public class Cat extends Animal implements IRun, Pettable {
     public static int getNumberOfCats() { // Doesn't have a setter because it's
         return numberOfCats;              // not meant to be changed by the user,
     }                                     // it increments by itself when the
-                                          // constructor it's called.
+    // constructor it's called.
 
     public int getHappiness() {
         return happiness;
