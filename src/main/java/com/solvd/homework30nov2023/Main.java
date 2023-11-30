@@ -1,6 +1,8 @@
 package com.solvd.homework30nov2023;
 
 import com.solvd.homework30nov2023.custom.CustomLinkedList;
+import com.solvd.homework30nov2023.enums.Pet;
+import com.solvd.homework30nov2023.enums.Specie;
 import com.solvd.homework30nov2023.exceptions.*;
 import com.solvd.homework30nov2023.interfaces.*;
 import com.solvd.homework30nov2023.models.*;
@@ -29,7 +31,8 @@ public class Main {
 //            LOGGER.debug("Exception setting health: " + ihe);
 //        }
 //        homework2023nov13();
-        homework2034nov23();
+//        homework2034nov23();
+        homework2023nov30();
     }
 
     private static void homework2023oct30() {
@@ -469,5 +472,17 @@ public class Main {
                 LOGGER.error("Exception: " + e);
             }
         }
+    }
+
+    private static void homework2023nov30() {
+        // Enums
+        for (Specie specie : Specie.values()) {
+            LOGGER.info(specie.getName());
+        }
+
+        for (Pet pet : Pet.values()){
+            LOGGER.info(pet.getSpecie().getInfo());
+        }
+
     }
 }
