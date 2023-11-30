@@ -3,7 +3,7 @@ package com.solvd.homework30nov2023.enums;
 public enum Specie {
     CAPYBARA("Capybara", "Rodent") {
         @Override
-        public String getInfo()  {
+        public String getInfo() {
             return """
                     The capybara or greater capybara is a giant cavy rodent
                      native to South America. It is the largest living rodent
@@ -12,9 +12,9 @@ public enum Specie {
                     """;
         }
     },
-    CAT("Cat", "Mammal"){
+    CAT("Cat", "Mammal") {
         @Override
-        public String getInfo()  {
+        public String getInfo() {
             return """
                     The cat, commonly referred to as the domestic cat or house
                     cat, is the only domesticated species in the family Felidae.

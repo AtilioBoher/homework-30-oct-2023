@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -475,14 +479,63 @@ public class Main {
     }
 
     private static void homework2023nov30() {
-        // Enums
+        LOGGER.info("--------5 LAMBDA FUNCTIONS FROM JAVA.UTIL.FUNCTION PACKAGE----------");
+        useOfFiveLambdasFromUtilPackage();
+
+        LOGGER.info("--------------3 CUSTOM LAMBDA FUNCTIONS WITH GENERICS---------------");
+        threeCustomLambdas();
+
+        LOGGER.info("---------------------CREATE 5 COMPLEX ENUMS-------------------------");
+        // I use only two because they are all similar
+        useOfTwoOfTheEnumsCreated();
+    }
+
+    private static void useOfFiveLambdasFromUtilPackage() {
+        // java.util.function package
+        Consumer<Integer> logInDebug = LOGGER::debug;
+        Consumer<Integer> logInError = LOGGER::error;
+        whereIWantToLogSomething(logInDebug);
+        whereIWantToLogSomething(logInError);
+
+        Integer info = 1; // I also incorporate information from this context
+                           // to the message that will be seen in another context
+        Supplier<String> customMassage = () -> "This is a custom Message "+ info.toString();
+        LOGGER.info(customMassage.get());
+
+        Function<Integer, String> happyBirthdayMessage = (age) -> "Happy " + age.toString() + "th birthday!";
+        LOGGER.info(happyBirthdayMessage.apply(27));
+
+        Predicate<String> customCriteria = (s) -> s.length() < 20;
+        LOGGER.info("Custom Criteria is: " + customCriteria.test("some text"));
+    }
+
+    private static void threeCustomLambdas() {
+        TriConsumer<Integer, Integer, Integer> displayer = (x, y, z) -> LOGGER.info(
+                "The numbers supplied are: " + x + " " + y + " " + z);
+        displayer.accept(1, 2, 3);
+
+        TriFunction<Integer, Integer, Integer, Integer> adder = (x, y, z) -> x + y + z;
+        LOGGER.info(adder.apply(1, 2, 3));
+
+        TriPredicate<Integer, Integer, Integer> greaterThan = (x, y, z) -> x > (y + z);
+        LOGGER.info(greaterThan.test(1, 2, 3));
+    }
+
+    private static void useOfTwoOfTheEnumsCreated() {
         for (Specie specie : Specie.values()) {
             LOGGER.info(specie.getName());
         }
 
-        for (Pet pet : Pet.values()){
+        for (Pet pet : Pet.values()) {
             LOGGER.info(pet.getSpecie().getInfo());
         }
+    }
 
+    private static void whereIWantToLogSomething(Consumer<Integer> customLog) {
+        int i = 4;
+        // does something with i
+        // Then I need to log the result in different ways
+        customLog.accept(i);
+        // The function continues...
     }
 }

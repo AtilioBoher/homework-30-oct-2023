@@ -1,7 +1,7 @@
 package com.solvd.homework30nov2023.enums;
 
 public enum Pet {
-    CAT(Specie.CAT) ,
+    CAT(Specie.CAT),
     DOG(Specie.DOG);
 
     final Specie specie;
