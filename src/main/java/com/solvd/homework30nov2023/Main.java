@@ -35,7 +35,7 @@ public class Main {
 //            LOGGER.debug("Exception setting health: " + ihe);
 //        }
 //        homework2023nov13();
-//        homework2034nov23();
+//        homework2023nov23();
         homework2023nov30();
     }
 
@@ -426,7 +426,7 @@ public class Main {
         }
     }
 
-    private static void homework2034nov23() {
+    private static void homework2023nov23() {
         File inputFile = new File("src/main/resources/text.txt");
         File outputFile = new File("src/main/resources/count.txt");
 
