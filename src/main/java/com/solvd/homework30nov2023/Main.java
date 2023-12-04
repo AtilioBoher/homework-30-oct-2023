@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.*;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.Map.Entry;
@@ -544,9 +545,9 @@ public class Main {
     private static void homework2023dic4() {
         LOGGER.info("----------------7 Collection Stream----------------------");
         sevenCollectionStream();
-
+        LOGGER.info("----------------Reflection----------------------");
+        reflection();
     }
-
 
     private static void sevenCollectionStream() {
         List<String> names = List.of("John", "Tony", "Carmela", "James", "Joe", "Paulie");
@@ -555,6 +556,7 @@ public class Main {
                 .filter(s -> s.startsWith("J"))
                 .count();
         LOGGER.info("Number of names that starts with \"J\": " + count);
+        LOGGER.info("##################################");
         LOGGER.info("These names are:");
         names.stream()
                 .filter(s -> s.startsWith("J"))
@@ -563,14 +565,17 @@ public class Main {
         List<String> namesStartWithJ = names.stream()
                 .filter(s -> s.startsWith("J"))
                 .toList();
+        LOGGER.info("##################################");
         LOGGER.info("Extracted list of names that starts with J: " + namesStartWithJ);
 
         List<Integer> nums = List.of(244, 23, 2, 97, 2, 6, 23, 6, 10);
+        LOGGER.info("##################################");
         LOGGER.info("Numbers that are grater than 10:");
         nums.stream()
                 .filter(n -> n > 10)
                 .collect(Collectors.toSet())
                 .forEach(LOGGER::info);
+        LOGGER.info("##################################");
         LOGGER.info("Numbers that appears more than once:");
         nums.stream()
                 .filter(n -> Collections.frequency(nums, n) > 1)
@@ -589,17 +594,96 @@ public class Main {
 
         List<Animal> animals = List.of(spike, carlie, susan,
                 coco, rupert, jim, jeremy, rose, anotherCat);
-
+        LOGGER.info("##################################");
         LOGGER.info("All the cats:");
         animals.stream()
                 .filter(a -> a instanceof Cat)
                 .map(Animal::getSpecie)
                 .forEach(LOGGER::info);
-
+        LOGGER.info("##################################");
         LOGGER.info("All animals older than 6:");
         animals.stream()
                 .filter(a -> a.getAge() > 6)
                 .map(Animal::getSpecie)
                 .forEach(LOGGER::info);
+    }
+
+    private static void reflection() {
+        Class<Cat> myClass;
+        try {
+            myClass = (Class<Cat>) Class.forName("com.solvd.homework30nov2023.models.Cat");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        LOGGER.info("There's only one constructor in the Cat class, and its parameters are:");
+        // we'll use a for statement anyway.
+        Constructor[] constructors = myClass.getConstructors();
+        for (Constructor constructor : constructors) {
+            Parameter[] parameters = constructor.getParameters();
+            String aux = "";
+            for (Parameter parameter : parameters) {
+                aux += parameter.getType() + " " + parameter.getName() + ", ";
+
+            }
+            LOGGER.info(aux);
+        }
+
+        LOGGER.info("##################################");
+        LOGGER.info("I create an instance of the Cat class using the constructor:");
+        Cat catInstance;
+        try {
+            catInstance = Cat.class
+                    .getConstructor(String.class, String.class, int.class)
+                    .newInstance("Bobcat", "Wild", 10);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        LOGGER.info(catInstance);
+
+        LOGGER.info("##################################");
+        LOGGER.info("Methods from the Cat class:");
+        Method[] methods = myClass.getDeclaredMethods();
+        for (Method method : methods) {
+            Parameter[] parameters = method.getParameters();
+            List<String> parameterNames = new ArrayList<>();
+            for (Parameter parameter : parameters) {
+
+                parameterNames.add(parameter.getType() + " " + parameter.getName());
+            }
+            String modifier = Modifier.toString(method.getModifiers());
+            LOGGER.info(modifier + " " + method.getReturnType() + " " + method.getName() + parameterNames);
+        }
+        LOGGER.info("##################################");
+        LOGGER.info("Fields from the Cat class (I print the values of the int fields):");
+        Field[] fields = myClass.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (int.class.equals(field.getType())) {
+                try {
+                    LOGGER.info(field.getType() + " " + field.getName() + " = " + field.getInt(catInstance));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                LOGGER.info(field.getType() + " " + field.getName());
+            }
+        }
+        LOGGER.info("##################################");
+        LOGGER.info("Invoke a method (I call the setHappiness method):");
+        Method method;
+        try {
+            method = myClass.getMethod("setHappiness", int.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+
+        LOGGER.info("Cat happiness before invoking the method: " + catInstance.getHappiness());
+        try {
+            method.invoke(catInstance, 90);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        LOGGER.info("Cat happiness after invoking the method: " + catInstance.getHappiness());
     }
 }
