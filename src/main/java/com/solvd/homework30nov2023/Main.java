@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -36,7 +37,8 @@ public class Main {
 //        }
 //        homework2023nov13();
 //        homework2023nov23();
-        homework2023nov30();
+//        homework2023nov30();
+        homework2023dic4();
     }
 
     private static void homework2023oct30() {
@@ -498,8 +500,8 @@ public class Main {
         whereIWantToLogSomething(logInError);
 
         Integer info = 1; // I also incorporate information from this context
-                           // to the message that will be seen in another context
-        Supplier<String> customMassage = () -> "This is a custom Message "+ info.toString();
+        // to the message that will be seen in another context
+        Supplier<String> customMassage = () -> "This is a custom Message " + info.toString();
         LOGGER.info(customMassage.get());
 
         Function<Integer, String> happyBirthdayMessage = (age) -> "Happy " + age.toString() + "th birthday!";
@@ -537,5 +539,67 @@ public class Main {
         // Then I need to log the result in different ways
         customLog.accept(i);
         // The function continues...
+    }
+
+    private static void homework2023dic4() {
+        LOGGER.info("----------------7 Collection Stream----------------------");
+        sevenCollectionStream();
+
+    }
+
+
+    private static void sevenCollectionStream() {
+        List<String> names = List.of("John", "Tony", "Carmela", "James", "Joe", "Paulie");
+
+        long count = names.stream()
+                .filter(s -> s.startsWith("J"))
+                .count();
+        LOGGER.info("Number of names that starts with \"J\": " + count);
+        LOGGER.info("These names are:");
+        names.stream()
+                .filter(s -> s.startsWith("J"))
+                .forEach(LOGGER::info);
+        // we can also use collect to create a new list
+        List<String> namesStartWithJ = names.stream()
+                .filter(s -> s.startsWith("J"))
+                .toList();
+        LOGGER.info("Extracted list of names that starts with J: " + namesStartWithJ);
+
+        List<Integer> nums = List.of(244, 23, 2, 97, 2, 6, 23, 6, 10);
+        LOGGER.info("Numbers that are grater than 10:");
+        nums.stream()
+                .filter(n -> n > 10)
+                .collect(Collectors.toSet())
+                .forEach(LOGGER::info);
+        LOGGER.info("Numbers that appears more than once:");
+        nums.stream()
+                .filter(n -> Collections.frequency(nums, n) > 1)
+                .collect(Collectors.toSet())
+                .forEach(LOGGER::info);
+
+        Dog spike = new Dog("Golden Retriever", "Domestic", 2);
+        Cat carlie = new Cat("Bobcat", "Wild", 10);
+        Lion susan = new Lion("Lion", "Wild", 15);
+        Crocodile coco = new Crocodile("Crocodile", "Wild", 6);
+        Elephant rupert = new Elephant("Asian Elephant", "Endangered", 8);
+        Capybara jim = new Capybara("Capybara", "Wild", 10);
+        Eagle jeremy = new Eagle("Eagle", "Wild", 5);
+        Nightingale rose = new Nightingale("Nightingale", "Wild", 6);
+        Cat anotherCat = new Cat("Siamese", "Domestic", 4);
+
+        List<Animal> animals = List.of(spike, carlie, susan,
+                coco, rupert, jim, jeremy, rose, anotherCat);
+
+        LOGGER.info("All the cats:");
+        animals.stream()
+                .filter(a -> a instanceof Cat)
+                .map(Animal::getSpecie)
+                .forEach(LOGGER::info);
+
+        LOGGER.info("All animals older than 6:");
+        animals.stream()
+                .filter(a -> a.getAge() > 6)
+                .map(Animal::getSpecie)
+                .forEach(LOGGER::info);
     }
 }
