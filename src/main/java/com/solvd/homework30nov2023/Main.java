@@ -21,6 +21,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -694,10 +695,26 @@ public class Main {
 
     private static void homework2023dic7() {
         ConnectionPool connectionPool = ConnectionPool.create();
-        Thread thread = new Thread(new ConnectionThread(connectionPool));
+        ConnectionThread thread = new ConnectionThread(connectionPool);
         ExecutorService executorService = Executors.newFixedThreadPool(7);
         for (int i = 0; i < 7; i++)
             executorService.execute(thread);
         executorService.shutdown();
+        boolean terminatedCorrectly;
+        try {
+            terminatedCorrectly = executorService.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if (terminatedCorrectly) {
+            LOGGER.info("-------Lets read the values collected in our CopyOnWriteArrayList------- ");
+            String[] values = thread.readValues();
+            for (String value : values) {
+                LOGGER.info(value);
+            }
+        } else {
+            LOGGER.info("Threads didn't execute correctly");
+        }
+
     }
 }
