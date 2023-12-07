@@ -6,6 +6,9 @@ import com.solvd.homework30nov2023.enums.Specie;
 import com.solvd.homework30nov2023.exceptions.*;
 import com.solvd.homework30nov2023.interfaces.*;
 import com.solvd.homework30nov2023.models.*;
+import com.solvd.homework30nov2023.threads.ConnectionPool;
+import com.solvd.homework30nov2023.threads.ConnectionThread;
+import com.solvd.homework30nov2023.threads.MockConnection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +20,8 @@ import java.lang.reflect.*;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -39,7 +44,8 @@ public class Main {
 //        homework2023nov13();
 //        homework2023nov23();
 //        homework2023nov30();
-        homework2023dic4();
+//        homework2023dic4();
+        homework2034dic7();
     }
 
     private static void homework2023oct30() {
@@ -685,5 +691,14 @@ public class Main {
             throw new RuntimeException(e);
         }
         LOGGER.info("Cat happiness after invoking the method: " + catInstance.getHappiness());
+    }
+
+    private static void homework2034dic7() {
+        ConnectionPool connectionPool = ConnectionPool.create();
+        Thread thread = new Thread(new ConnectionThread(connectionPool));
+        ExecutorService executorService = Executors.newFixedThreadPool(7);
+        for (int i = 0; i < 7; i++)
+            executorService.execute(thread);
+        executorService.shutdown();
     }
 }
