@@ -8,7 +8,6 @@ import com.solvd.homework30nov2023.interfaces.*;
 import com.solvd.homework30nov2023.models.*;
 import com.solvd.homework30nov2023.threads.ConnectionPool;
 import com.solvd.homework30nov2023.threads.ConnectionThread;
-import com.solvd.homework30nov2023.threads.MockConnection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +44,7 @@ public class Main {
 //        homework2023nov23();
 //        homework2023nov30();
 //        homework2023dic4();
-        homework2034dic7();
+        homework2023dic7();
     }
 
     private static void homework2023oct30() {
@@ -693,7 +692,7 @@ public class Main {
         LOGGER.info("Cat happiness after invoking the method: " + catInstance.getHappiness());
     }
 
-    private static void homework2034dic7() {
+    private static void homework2023dic7() {
         ConnectionPool connectionPool = ConnectionPool.create();
         Thread thread = new Thread(new ConnectionThread(connectionPool));
         ExecutorService executorService = Executors.newFixedThreadPool(7);
