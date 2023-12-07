@@ -1,6 +1,5 @@
 package com.solvd.homework30nov2023.threads;
 
-import com.solvd.homework30nov2023.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,15 +8,21 @@ import java.util.List;
 
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+    private static ConnectionPool instance;
     private static List<MockConnection> connectionPool;
     private static List<MockConnection> usedConnections = new ArrayList<>();
     private static int INITIAL_POOL_SIZE = 5;
 
-    public static ConnectionPool create() {
+    private ConnectionPool() {
         connectionPool = new ArrayList<>(INITIAL_POOL_SIZE);
         for (int i = 0; i < INITIAL_POOL_SIZE; i++)
             connectionPool.add(new MockConnection());
-        return new ConnectionPool();
+    }
+
+    public static ConnectionPool create() {
+        if (instance == null)
+            instance = new ConnectionPool();
+        return instance;
     }
 
     synchronized public MockConnection getConnection() {
