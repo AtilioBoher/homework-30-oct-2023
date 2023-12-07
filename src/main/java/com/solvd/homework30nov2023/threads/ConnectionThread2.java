@@ -2,12 +2,11 @@ package com.solvd.homework30nov2023.threads;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ConnectionThread implements Runnable {
-
+public class ConnectionThread2 extends Thread {
     ConnectionPool connectionPool;
     CopyOnWriteArrayList<String> register = new CopyOnWriteArrayList<>();
 
-    public ConnectionThread(ConnectionPool connectionPool) {
+    public ConnectionThread2(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 

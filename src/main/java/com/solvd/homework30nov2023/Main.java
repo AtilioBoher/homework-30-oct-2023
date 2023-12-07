@@ -8,6 +8,7 @@ import com.solvd.homework30nov2023.interfaces.*;
 import com.solvd.homework30nov2023.models.*;
 import com.solvd.homework30nov2023.threads.ConnectionPool;
 import com.solvd.homework30nov2023.threads.ConnectionThread;
+import com.solvd.homework30nov2023.threads.ConnectionThread2;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -695,7 +696,17 @@ public class Main {
 
     private static void homework2023dic7() {
         ConnectionPool connectionPool = ConnectionPool.create();
+
+        // ----------------------IMPORTANT NOTE-----------------------------------
+        // Both Classes do the same thing, the only differences is that
+        // ConcurrentThread is defined implementing the Runnable interface and
+        // ConcurrentThread2 is defined extending the Thread Class.
+
         ConnectionThread thread = new ConnectionThread(connectionPool);
+//        ConnectionThread2 thread = new ConnectionThread2(connectionPool);
+
+        // ----------------------------------------------------------------------
+
         ExecutorService executorService = Executors.newFixedThreadPool(7);
         for (int i = 0; i < 7; i++)
             executorService.execute(thread);
