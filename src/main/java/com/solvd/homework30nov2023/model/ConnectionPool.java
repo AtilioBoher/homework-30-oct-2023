@@ -21,7 +21,7 @@ public class ConnectionPool {
     private static String password;
     private static List<Connection> connectionPool;
     private static List<Connection> usedConnections = new ArrayList<>();
-    private static final int INITIAL_POOL_SIZE = 1;
+    private static final int INITIAL_POOL_SIZE = 5;
 
     private ConnectionPool() {
         connectionPool = new ArrayList<>(INITIAL_POOL_SIZE);
