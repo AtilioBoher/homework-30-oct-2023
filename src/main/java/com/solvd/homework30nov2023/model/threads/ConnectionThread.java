@@ -13,7 +13,7 @@ public class ConnectionThread implements Runnable {
 
     @Override
     public void run() {
-        MockConnection connection = connectionPool.getConnection();
+        Connection connection = connectionPool.getConnection();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
