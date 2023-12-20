@@ -1,22 +1,39 @@
-package com.solvd.homework30nov2023.model.threads;
+package com.solvd.homework30nov2023.model;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static ConnectionPool instance;
+    private static Properties p = new Properties();
+    private static String url;
+    private static String userName;
+    private static String password;
     private static List<Connection> connectionPool;
     private static List<Connection> usedConnections = new ArrayList<>();
-    private static int INITIAL_POOL_SIZE = 5;
+    private static final int INITIAL_POOL_SIZE = 1;
 
     private ConnectionPool() {
         connectionPool = new ArrayList<>(INITIAL_POOL_SIZE);
-        for (int i = 0; i < INITIAL_POOL_SIZE; i++)
-            connectionPool.add(new Connection());
+        for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
+            Connection connection = null;
+            try {
+                connection = DriverManager.getConnection(url, userName, password);
+            } catch (SQLException e) {
+                LOGGER.info(e);
+            }
+            connectionPool.add(connection);
+        }
     }
 
     public static ConnectionPool create() {
@@ -25,11 +42,20 @@ public class ConnectionPool {
         return instance;
     }
 
+    static {
+        try (FileInputStream f = new FileInputStream("src/main/resources/db.properties")) {
+            p.load(f);
+        } catch (IOException e) {
+            LOGGER.info(e);
+        }
+        url = p.getProperty("db.url");
+        userName = p.getProperty("db.username");
+        password = p.getProperty("db.password");
+    }
+
     synchronized public Connection getConnection() {
-        LOGGER.info(Thread.currentThread().getName() + " getting connection");
         if (connectionPool.isEmpty()) {
             try {
-                LOGGER.info(Thread.currentThread().getName() + " waiting....");
                 wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -38,7 +64,6 @@ public class ConnectionPool {
         Connection connection = connectionPool
                 .remove(connectionPool.size() - 1);
         usedConnections.add(connection);
-        LOGGER.info(Thread.currentThread().getName() + " got connection");
         return connection;
     }
 
