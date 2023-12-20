@@ -1,14 +1,13 @@
 package com.solvd.homework30nov2023;
 
-import com.solvd.homework30nov2023.custom.CustomLinkedList;
-import com.solvd.homework30nov2023.enums.Pet;
-import com.solvd.homework30nov2023.enums.Specie;
-import com.solvd.homework30nov2023.exceptions.*;
-import com.solvd.homework30nov2023.interfaces.*;
-import com.solvd.homework30nov2023.models.*;
-import com.solvd.homework30nov2023.threads.ConnectionPool;
-import com.solvd.homework30nov2023.threads.ConnectionThread;
-import com.solvd.homework30nov2023.threads.ConnectionThread2;
+import com.solvd.homework30nov2023.model.custom.CustomLinkedList;
+import com.solvd.homework30nov2023.model.enums.Pet;
+import com.solvd.homework30nov2023.model.enums.Specie;
+import com.solvd.homework30nov2023.model.exceptions.*;
+import com.solvd.homework30nov2023.model.interfaces.*;
+import com.solvd.homework30nov2023.model.models.*;
+import com.solvd.homework30nov2023.model.threads.ConnectionPool;
+import com.solvd.homework30nov2023.model.threads.ConnectionThread;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -618,7 +617,7 @@ public class Main {
     private static void reflection() {
         Class<Cat> myClass;
         try {
-            myClass = (Class<Cat>) Class.forName("com.solvd.homework30nov2023.models.Cat");
+            myClass = (Class<Cat>) Class.forName("com.solvd.homework30nov2023.model.models.Cat");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
