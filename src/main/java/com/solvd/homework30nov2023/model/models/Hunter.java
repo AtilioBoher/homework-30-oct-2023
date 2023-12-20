@@ -5,7 +5,7 @@ import com.solvd.homework30nov2023.model.interfaces.IRun;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Hunter extends Person implements IRun {
+public class Hunter extends Employee implements IRun {
 
     private static final Logger LOGGER = LogManager.getLogger(Hunter.class);
     private Riffle riffle;

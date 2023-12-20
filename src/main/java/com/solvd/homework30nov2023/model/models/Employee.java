@@ -3,14 +3,14 @@ package com.solvd.homework30nov2023.model.models;
 import com.solvd.homework30nov2023.model.exceptions.InvalidAgeException;
 import com.solvd.homework30nov2023.model.interfaces.IPet;
 
-public abstract class Person implements IPet {
+public abstract class Employee implements IPet {
 
     private int age;
 
     private String profession;
     private String name;
 
-    public Person(String profession, String name, int age) {
+    public Employee(String profession, String name, int age) {
         this.profession = profession;
         this.name = name;
         this.age = age;
