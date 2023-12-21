@@ -6,10 +6,8 @@ import com.solvd.homework30nov2023.model.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDao implements IEmployeeDao {
@@ -31,7 +29,10 @@ public class EmployeeDao implements IEmployeeDao {
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
+                employee.setId(resultSet.getInt("id"));
                 employee.setFirstName(resultSet.getString("first_name"));
+                employee.setLastName(resultSet.getString("last_name"));
+                employee.setPosition(resultSet.getString("position"));
                 employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
             }
         } catch (SQLException e) {
@@ -61,22 +62,111 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public void insert(Employee t) {
-
+    public int insert(Employee employee) {
+        Connection connection = connectionPool.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int generatedKey = 0;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO employees " +
+                            "(first_name, last_name, position, years_of_exp) " +
+                            "VALUES " +
+                            "(?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            preparedStatement.setString(1, employee.getFirstName());
+            preparedStatement.setString(2, employee.getLastName());
+            preparedStatement.setString(3, employee.getPosition());
+            preparedStatement.setInt(4, employee.getYearsOfExperience());
+            preparedStatement.execute();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                generatedKey = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+            closeAll(resultSet, preparedStatement);
+        }
+        return generatedKey;
     }
 
     @Override
-    public void update(Employee t) {
+    public void update(Employee employee) {
+        Connection connection = connectionPool.getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "UPDATE employees SET " +
+                            "first_name = ?, " +
+                            "last_name = ?, " +
+                            "position = ?, " +
+                            "years_of_exp = ? " +
+                            "WHERE id = ?"
+            );
+            preparedStatement.setString(1, employee.getFirstName());
+            preparedStatement.setString(2, employee.getLastName());
+            preparedStatement.setString(3, employee.getPosition());
+            preparedStatement.setInt(4, employee.getYearsOfExperience());
+            preparedStatement.setInt(5, employee.getId());
+            preparedStatement.execute();
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+            closeAll(null, preparedStatement);
+        }
     }
 
     @Override
-    public void remove(Employee t) {
-
+    public void removeById(int id) {
+        Connection connection = connectionPool.getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "DELETE FROM employees " +
+                            "WHERE id = ?"
+            );
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+            closeAll(null, preparedStatement);
+        }
     }
 
     @Override
     public List<Employee> getAll() {
-        return null;
+        List<Employee> list = new ArrayList<>();
+        Connection connection = connectionPool.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM employees"
+            );
+            preparedStatement.execute();
+            resultSet = preparedStatement.getResultSet();
+            while (resultSet.next()) {
+                Employee employee = new Employee();
+                employee.setId(resultSet.getInt("id"));
+                employee.setFirstName(resultSet.getString("first_name"));
+                employee.setLastName(resultSet.getString("last_name"));
+                employee.setPosition(resultSet.getString("position"));
+                employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
+                list.add(employee);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+            closeAll(resultSet, preparedStatement);
+        }
+        return list;
     }
 }

@@ -6,11 +6,11 @@ public interface IBaseDao<T> {
 
     T getById(int id);
 
-    void insert(T t);
+    int insert(T t);
 
     void update(T t);
 
-    void remove(T t);
+    void removeById(int id);
 
     List<T> getAll();
 }

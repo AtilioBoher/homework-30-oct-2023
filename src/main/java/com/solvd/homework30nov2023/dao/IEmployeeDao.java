@@ -7,11 +7,11 @@ import java.util.List;
 public interface IEmployeeDao extends IBaseDao<Employee>{
     Employee getById(int id);
 
-    void insert(Employee t);
+    int insert(Employee t);
 
     void update(Employee t);
 
-    void remove(Employee t);
+    void removeById(int id);
 
     List<Employee> getAll();
 }
