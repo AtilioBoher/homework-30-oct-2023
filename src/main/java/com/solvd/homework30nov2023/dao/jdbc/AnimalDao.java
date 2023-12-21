@@ -1,9 +1,9 @@
 package com.solvd.homework30nov2023.dao.jdbc;
 
 import com.solvd.homework30nov2023.dao.IAnimalDao;
+import com.solvd.homework30nov2023.dao.Utils;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.ConnectionPool;
-import com.solvd.homework30nov2023.model.Employee;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,26 +37,9 @@ public class AnimalDao implements IAnimalDao {
             throw new RuntimeException(e);
         } finally {
             connectionPool.releaseConnection(connection);
-            closeAll(resultSet, preparedStatement);
+            Utils.closeAll(resultSet, preparedStatement);
         }
         return animal;
-    }
-
-    private void closeAll(ResultSet resultSet, PreparedStatement preparedStatement) {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if (preparedStatement != null) {
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Override
@@ -86,7 +69,7 @@ public class AnimalDao implements IAnimalDao {
             throw new RuntimeException(e);
         } finally {
             connectionPool.releaseConnection(connection);
-            closeAll(resultSet, preparedStatement);
+            Utils.closeAll(resultSet, preparedStatement);
         }
         return generatedKey;
     }
@@ -115,7 +98,7 @@ public class AnimalDao implements IAnimalDao {
             throw new RuntimeException(e);
         } finally {
             connectionPool.releaseConnection(connection);
-            closeAll(null, preparedStatement);
+            Utils.closeAll(null, preparedStatement);
         }
     }
 
@@ -134,7 +117,7 @@ public class AnimalDao implements IAnimalDao {
             throw new RuntimeException(e);
         } finally {
             connectionPool.releaseConnection(connection);
-            closeAll(null, preparedStatement);
+            Utils.closeAll(null, preparedStatement);
         }
     }
 
@@ -163,7 +146,7 @@ public class AnimalDao implements IAnimalDao {
             throw new RuntimeException(e);
         } finally {
             connectionPool.releaseConnection(connection);
-            closeAll(resultSet, preparedStatement);
+            Utils.closeAll(resultSet, preparedStatement);
         }
         return list;
     }

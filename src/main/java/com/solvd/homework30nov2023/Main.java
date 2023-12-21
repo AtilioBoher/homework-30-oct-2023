@@ -1,8 +1,10 @@
 package com.solvd.homework30nov2023;
 
 import com.solvd.homework30nov2023.dao.jdbc.AnimalDao;
+import com.solvd.homework30nov2023.dao.jdbc.DepartmentDao;
 import com.solvd.homework30nov2023.dao.jdbc.EmployeeDao;
 import com.solvd.homework30nov2023.model.Animal;
+import com.solvd.homework30nov2023.model.Department;
 import com.solvd.homework30nov2023.model.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,14 +17,14 @@ public class Main {
 
     public static void main(String[] args) {
 //        employeeTest();
-        animalTest();
-
+//        animalTest();
+        departmentTest();
     }
 
     private static void employeeTest() {
         EmployeeDao employeeDao = new EmployeeDao();
 
-        LOGGER.info("Update display: ");
+        LOGGER.info("Update and display: ");
         Employee employee = new Employee(2, "Atilio", "Boher", "Tester", 1);
         employeeDao.update(employee);
 
@@ -50,30 +52,59 @@ public class Main {
 
     private static void animalTest() {
         AnimalDao animalDao = new AnimalDao();
-//
-        LOGGER.info("Update display: ");
+
+        LOGGER.info("Update and display: ");
         Animal animal = new Animal(1, "asd", 5, "asd", 1);
         animalDao.update(animal);
-//
+
         animal = animalDao.getById(1);
         LOGGER.info("getById: " + animal + "\n");
-//
+
         LOGGER.info("Insert and then display the entire table: ");
         animal.setId(animalDao.insert(animal));
         LOGGER.info("Generated Id of the new entry: " + animal.getId());
-//
+
         List<Animal> animals = animalDao.getAll();
         for (Animal a : animals) {
             LOGGER.info(a);
         }
-//
+
         LOGGER.info("\n");
-//
+
         LOGGER.info("Delete added entry and then display the entire table: ");
         animalDao.removeById(animal.getId());
         animals = animalDao.getAll();
         for (Animal a : animals) {
             LOGGER.info(a);
+        }
+    }
+
+    private static void departmentTest() {
+        DepartmentDao departmentDao = new DepartmentDao();
+
+        LOGGER.info("Update and display: ");
+        Department department = new Department(1, "asd", "description: sfasdf");
+        departmentDao.update(department);
+
+        department = departmentDao.getById(1);
+        LOGGER.info("getById: " + department + "\n");
+
+        LOGGER.info("Insert and then display the entire table: ");
+        department.setId(departmentDao.insert(department));
+        LOGGER.info("Generated Id of the new entry: " + department.getId());
+
+        List<Department> departments = departmentDao.getAll();
+        for (Department d : departments) {
+            LOGGER.info(d);
+        }
+
+        LOGGER.info("\n");
+
+        LOGGER.info("Delete added entry and then display the entire table: ");
+        departmentDao.removeById(department.getId());
+        departments = departmentDao.getAll();
+        for (Department d : departments) {
+            LOGGER.info(d);
         }
     }
 }

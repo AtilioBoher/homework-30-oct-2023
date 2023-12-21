@@ -1,38 +1,35 @@
 package com.solvd.homework30nov2023.dao.jdbc;
 
-import com.solvd.homework30nov2023.dao.IEmployeeDao;
+import com.solvd.homework30nov2023.dao.IDepartmentDao;
 import com.solvd.homework30nov2023.dao.Utils;
 import com.solvd.homework30nov2023.model.ConnectionPool;
-import com.solvd.homework30nov2023.model.Employee;
+import com.solvd.homework30nov2023.model.Department;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDao implements IEmployeeDao {
+public class DepartmentDao implements IDepartmentDao {
 
     ConnectionPool connectionPool = ConnectionPool.create();
-//    private static final Logger LOGGER = LogManager.getLogger(EmployeeDao.class);
 
     @Override
-    public Employee getById(int id) {
-        Employee employee = new Employee();
+    public Department getById(int id) {
+        Department department = new Department();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM employees WHERE id = ?"
+                    "SELECT * FROM departments WHERE id = ?"
             );
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                employee.setId(resultSet.getInt("id"));
-                employee.setFirstName(resultSet.getString("first_name"));
-                employee.setLastName(resultSet.getString("last_name"));
-                employee.setPosition(resultSet.getString("position"));
-                employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
+                department.setId(resultSet.getInt("id"));
+                department.setName(resultSet.getString("name"));
+                department.setDescription(resultSet.getString("description"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -40,27 +37,25 @@ public class EmployeeDao implements IEmployeeDao {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
         }
-        return employee;
+        return department;
     }
 
     @Override
-    public int insert(Employee employee) {
+    public int insert(Department department) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int generatedKey = 0;
         try {
             preparedStatement = connection.prepareStatement(
-                    "INSERT INTO employees " +
-                            "(first_name, last_name, position, years_of_exp) " +
+                    "INSERT INTO departments " +
+                            "(name, description) " +
                             "VALUES " +
-                            "(?, ?, ?, ?)",
+                            "(?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
-            preparedStatement.setString(1, employee.getFirstName());
-            preparedStatement.setString(2, employee.getLastName());
-            preparedStatement.setString(3, employee.getPosition());
-            preparedStatement.setInt(4, employee.getYearsOfExperience());
+            preparedStatement.setString(1, department.getName());
+            preparedStatement.setString(2, department.getDescription());
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -76,23 +71,19 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public void update(Employee employee) {
+    public void update(Department department) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "UPDATE employees SET " +
-                            "first_name = ?, " +
-                            "last_name = ?, " +
-                            "position = ?, " +
-                            "years_of_exp = ? " +
+                    "UPDATE departments SET " +
+                            "name = ?, " +
+                            "description = ? " +
                             "WHERE id = ?"
             );
-            preparedStatement.setString(1, employee.getFirstName());
-            preparedStatement.setString(2, employee.getLastName());
-            preparedStatement.setString(3, employee.getPosition());
-            preparedStatement.setInt(4, employee.getYearsOfExperience());
-            preparedStatement.setInt(5, employee.getId());
+            preparedStatement.setString(1, department.getName());
+            preparedStatement.setString(2, department.getDescription());
+            preparedStatement.setInt(3, department.getId());
             preparedStatement.execute();
 
         } catch (SQLException e) {
@@ -109,7 +100,7 @@ public class EmployeeDao implements IEmployeeDao {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "DELETE FROM employees " +
+                    "DELETE FROM departments " +
                             "WHERE id = ?"
             );
             preparedStatement.setInt(1, id);
@@ -123,25 +114,23 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public List<Employee> getAll() {
-        List<Employee> list = new ArrayList<>();
+    public List<Department> getAll() {
+        List<Department> list = new ArrayList<>();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM employees"
+                    "SELECT * FROM departments"
             );
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                Employee employee = new Employee();
-                employee.setId(resultSet.getInt("id"));
-                employee.setFirstName(resultSet.getString("first_name"));
-                employee.setLastName(resultSet.getString("last_name"));
-                employee.setPosition(resultSet.getString("position"));
-                employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
-                list.add(employee);
+                Department department = new Department();
+                department.setId(resultSet.getInt("id"));
+                department.setName(resultSet.getString("name"));
+                department.setDescription(resultSet.getString("description"));
+                list.add(department);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
