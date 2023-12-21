@@ -1,6 +1,7 @@
 package com.solvd.homework30nov2023.dao.jdbc;
 
-import com.solvd.homework30nov2023.dao.IEmployeeDao;
+import com.solvd.homework30nov2023.dao.IAnimalDao;
+import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.ConnectionPool;
 import com.solvd.homework30nov2023.model.Employee;
 
@@ -8,30 +9,29 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDao implements IEmployeeDao {
+public class AnimalDao implements IAnimalDao {
 
     ConnectionPool connectionPool = ConnectionPool.create();
-//    private static final Logger LOGGER = LogManager.getLogger(EmployeeDao.class);
 
     @Override
-    public Employee getById(int id) {
-        Employee employee = new Employee();
+    public Animal getById(int id) {
+        Animal animal = new Animal();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM employees WHERE id = ?"
+                    "SELECT * FROM animals WHERE id = ?"
             );
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                employee.setId(resultSet.getInt("id"));
-                employee.setFirstName(resultSet.getString("first_name"));
-                employee.setLastName(resultSet.getString("last_name"));
-                employee.setPosition(resultSet.getString("position"));
-                employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
+                animal.setId(resultSet.getInt("id"));
+                animal.setName(resultSet.getString("name"));
+                animal.setAge(resultSet.getInt("age"));
+                animal.setSpecie(resultSet.getString("specie"));
+                animal.setAttractionId(resultSet.getInt("attraction_id"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -39,7 +39,7 @@ public class EmployeeDao implements IEmployeeDao {
             connectionPool.releaseConnection(connection);
             closeAll(resultSet, preparedStatement);
         }
-        return employee;
+        return animal;
     }
 
     private void closeAll(ResultSet resultSet, PreparedStatement preparedStatement) {
@@ -60,23 +60,23 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public int insert(Employee employee) {
+    public int insert(Animal animal) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int generatedKey = 0;
         try {
             preparedStatement = connection.prepareStatement(
-                    "INSERT INTO employees " +
-                            "(first_name, last_name, position, years_of_exp) " +
+                    "INSERT INTO animals " +
+                            "(name, age, specie, attraction_id) " +
                             "VALUES " +
                             "(?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
-            preparedStatement.setString(1, employee.getFirstName());
-            preparedStatement.setString(2, employee.getLastName());
-            preparedStatement.setString(3, employee.getPosition());
-            preparedStatement.setInt(4, employee.getYearsOfExperience());
+            preparedStatement.setString(1, animal.getName());
+            preparedStatement.setInt(2, animal.getAge());
+            preparedStatement.setString(3, animal.getSpecie());
+            preparedStatement.setInt(4, animal.getAttractionId());
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -92,23 +92,23 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public void update(Employee employee) {
+    public void update(Animal animal) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "UPDATE employees SET " +
-                            "first_name = ?, " +
-                            "last_name = ?, " +
-                            "position = ?, " +
-                            "years_of_exp = ? " +
+                    "UPDATE animals SET " +
+                            "name = ?, " +
+                            "age = ?, " +
+                            "specie = ?, " +
+                            "attraction_id = ? " +
                             "WHERE id = ?"
             );
-            preparedStatement.setString(1, employee.getFirstName());
-            preparedStatement.setString(2, employee.getLastName());
-            preparedStatement.setString(3, employee.getPosition());
-            preparedStatement.setInt(4, employee.getYearsOfExperience());
-            preparedStatement.setInt(5, employee.getId());
+            preparedStatement.setString(1, animal.getName());
+            preparedStatement.setInt(2, animal.getAge());
+            preparedStatement.setString(3, animal.getSpecie());
+            preparedStatement.setInt(4, animal.getAttractionId());
+            preparedStatement.setInt(5, animal.getId());
             preparedStatement.execute();
 
         } catch (SQLException e) {
@@ -125,7 +125,7 @@ public class EmployeeDao implements IEmployeeDao {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "DELETE FROM employees " +
+                    "DELETE FROM animals " +
                             "WHERE id = ?"
             );
             preparedStatement.setInt(1, id);
@@ -139,25 +139,25 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public List<Employee> getAll() {
-        List<Employee> list = new ArrayList<>();
+    public List<Animal> getAll() {
+        List<Animal> list = new ArrayList<>();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM employees"
+                    "SELECT * FROM animals"
             );
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                Employee employee = new Employee();
-                employee.setId(resultSet.getInt("id"));
-                employee.setFirstName(resultSet.getString("first_name"));
-                employee.setLastName(resultSet.getString("last_name"));
-                employee.setPosition(resultSet.getString("position"));
-                employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
-                list.add(employee);
+                Animal animal = new Animal();
+                animal.setId(resultSet.getInt("id"));
+                animal.setName(resultSet.getString("name"));
+                animal.setAge(resultSet.getInt("age"));
+                animal.setSpecie(resultSet.getString("specie"));
+                animal.setAttractionId(resultSet.getInt("attraction_id"));
+                list.add(animal);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
