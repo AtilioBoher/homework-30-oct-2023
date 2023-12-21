@@ -3,7 +3,9 @@ package com.solvd.homework30nov2023.dao.jdbc;
 import com.solvd.homework30nov2023.dao.IAnimalDao;
 import com.solvd.homework30nov2023.dao.Utils;
 import com.solvd.homework30nov2023.model.Animal;
-import com.solvd.homework30nov2023.model.ConnectionPool;
+import com.solvd.homework30nov2023.dao.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 public class AnimalDao implements IAnimalDao {
 
     ConnectionPool connectionPool = ConnectionPool.create();
+    private static final Logger LOGGER = LogManager.getLogger(AnimalDao.class);
 
     @Override
     public Animal getById(int id) {
@@ -34,7 +37,7 @@ public class AnimalDao implements IAnimalDao {
                 animal.setAttractionId(resultSet.getInt("attraction_id"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
@@ -66,7 +69,7 @@ public class AnimalDao implements IAnimalDao {
                 generatedKey = resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
@@ -95,7 +98,7 @@ public class AnimalDao implements IAnimalDao {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(null, preparedStatement);
@@ -114,7 +117,7 @@ public class AnimalDao implements IAnimalDao {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(null, preparedStatement);
@@ -143,7 +146,7 @@ public class AnimalDao implements IAnimalDao {
                 list.add(animal);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);

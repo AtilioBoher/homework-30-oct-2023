@@ -2,8 +2,10 @@ package com.solvd.homework30nov2023.dao.jdbc;
 
 import com.solvd.homework30nov2023.dao.IDepartmentDao;
 import com.solvd.homework30nov2023.dao.Utils;
-import com.solvd.homework30nov2023.model.ConnectionPool;
+import com.solvd.homework30nov2023.dao.ConnectionPool;
 import com.solvd.homework30nov2023.model.Department;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 public class DepartmentDao implements IDepartmentDao {
 
     ConnectionPool connectionPool = ConnectionPool.create();
+    private static final Logger LOGGER = LogManager.getLogger(DepartmentDao.class);
 
     @Override
     public Department getById(int id) {
@@ -32,7 +35,7 @@ public class DepartmentDao implements IDepartmentDao {
                 department.setDescription(resultSet.getString("description"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
@@ -62,7 +65,7 @@ public class DepartmentDao implements IDepartmentDao {
                 generatedKey = resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
@@ -87,7 +90,7 @@ public class DepartmentDao implements IDepartmentDao {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(null, preparedStatement);
@@ -106,7 +109,7 @@ public class DepartmentDao implements IDepartmentDao {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(null, preparedStatement);
@@ -133,7 +136,7 @@ public class DepartmentDao implements IDepartmentDao {
                 list.add(department);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);

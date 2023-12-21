@@ -1,4 +1,4 @@
-package com.solvd.homework30nov2023.model;
+package com.solvd.homework30nov2023.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +30,7 @@ public class ConnectionPool {
             try {
                 connection = DriverManager.getConnection(url, userName, password);
             } catch (SQLException e) {
-                LOGGER.info(e);
+                LOGGER.error(e);
             }
             connectionPool.add(connection);
         }
@@ -58,7 +58,7 @@ public class ConnectionPool {
             try {
                 wait();
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                LOGGER.error(e);
             }
         }
         Connection connection = connectionPool

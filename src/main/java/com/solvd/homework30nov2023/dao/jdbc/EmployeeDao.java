@@ -2,8 +2,10 @@ package com.solvd.homework30nov2023.dao.jdbc;
 
 import com.solvd.homework30nov2023.dao.IEmployeeDao;
 import com.solvd.homework30nov2023.dao.Utils;
-import com.solvd.homework30nov2023.model.ConnectionPool;
+import com.solvd.homework30nov2023.dao.ConnectionPool;
 import com.solvd.homework30nov2023.model.Employee;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.List;
 public class EmployeeDao implements IEmployeeDao {
 
     ConnectionPool connectionPool = ConnectionPool.create();
-//    private static final Logger LOGGER = LogManager.getLogger(EmployeeDao.class);
+    private static final Logger LOGGER = LogManager.getLogger(EmployeeDao.class);
 
     @Override
     public Employee getById(int id) {
@@ -35,7 +37,7 @@ public class EmployeeDao implements IEmployeeDao {
                 employee.setYearsOfExperience(resultSet.getInt("years_of_exp"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
@@ -67,7 +69,7 @@ public class EmployeeDao implements IEmployeeDao {
                 generatedKey = resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
@@ -96,7 +98,7 @@ public class EmployeeDao implements IEmployeeDao {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(null, preparedStatement);
@@ -115,7 +117,7 @@ public class EmployeeDao implements IEmployeeDao {
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(null, preparedStatement);
@@ -144,7 +146,7 @@ public class EmployeeDao implements IEmployeeDao {
                 list.add(employee);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
