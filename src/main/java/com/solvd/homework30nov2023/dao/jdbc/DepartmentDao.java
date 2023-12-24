@@ -74,7 +74,7 @@ public class DepartmentDao implements IDepartmentDao {
     }
 
     @Override
-    public void update(Department department) {
+    public void update(Department department, Long id) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -86,7 +86,7 @@ public class DepartmentDao implements IDepartmentDao {
             );
             preparedStatement.setString(1, department.getName());
             preparedStatement.setString(2, department.getDescription());
-            preparedStatement.setInt(3, department.getId());
+            preparedStatement.setLong(3, id);
             preparedStatement.execute();
 
         } catch (SQLException e) {

@@ -10,7 +10,7 @@ public interface IAnimalDao extends IBaseDao<Animal> {
 
     int insert(Animal animal);
 
-    void update(Animal animal);
+    void update(Animal animal, Long id);
 
     void removeById(int id);
 

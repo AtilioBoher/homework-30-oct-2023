@@ -78,7 +78,7 @@ public class AnimalDao implements IAnimalDao {
     }
 
     @Override
-    public void update(Animal animal) {
+    public void update(Animal animal, Long id) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -94,7 +94,7 @@ public class AnimalDao implements IAnimalDao {
             preparedStatement.setInt(2, animal.getAge());
             preparedStatement.setString(3, animal.getSpecie());
             preparedStatement.setInt(4, animal.getAttractionId());
-            preparedStatement.setInt(5, animal.getId());
+            preparedStatement.setLong(5, id);
             preparedStatement.execute();
 
         } catch (SQLException e) {

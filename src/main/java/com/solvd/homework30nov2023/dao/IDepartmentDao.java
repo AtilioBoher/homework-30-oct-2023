@@ -10,7 +10,7 @@ public interface IDepartmentDao extends IBaseDao<Department> {
 
     int insert(Department department);
 
-    void update(Department department);
+    void update(Department department, Long id);
 
     void removeById(int id);
 

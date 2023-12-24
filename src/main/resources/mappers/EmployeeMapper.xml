@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.homework30nov2023.dao.IEmployeeDao">
+
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO employees
+        (first_name, last_name, position, years_of_exp)
+        VALUES
+        (#{firstName}, #{lastName}, #{position}, #{yearsOfExperience})
+    </insert>
+    
+    <update id="update">
+        UPDATE employees SET
+        first_name = #{employee.firstName},
+        last_name = #{employee.lastName},
+        position = #{employee.position},
+        years_of_exp = #{employee.yearsOfExperience}
+        WHERE id = #{id}
+    </update>
+</mapper>

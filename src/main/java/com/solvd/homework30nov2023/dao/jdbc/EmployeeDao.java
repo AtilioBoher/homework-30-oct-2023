@@ -78,7 +78,7 @@ public class EmployeeDao implements IEmployeeDao {
     }
 
     @Override
-    public void update(Employee employee) {
+    public void update(Employee employee, Long id) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -94,7 +94,7 @@ public class EmployeeDao implements IEmployeeDao {
             preparedStatement.setString(2, employee.getLastName());
             preparedStatement.setString(3, employee.getPosition());
             preparedStatement.setInt(4, employee.getYearsOfExperience());
-            preparedStatement.setInt(5, employee.getId());
+            preparedStatement.setLong(5, id);
             preparedStatement.execute();
 
         } catch (SQLException e) {

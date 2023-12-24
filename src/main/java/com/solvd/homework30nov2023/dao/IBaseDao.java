@@ -8,7 +8,7 @@ public interface IBaseDao<T> {
 
     int insert(T t);
 
-    void update(T t);
+    void update(T t, Long id);
 
     void removeById(int id);
 

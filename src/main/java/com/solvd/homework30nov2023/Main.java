@@ -16,8 +16,8 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-//        employeeTest();
-//        animalTest();
+        employeeTest();
+        animalTest();
         departmentTest();
     }
 
@@ -25,8 +25,8 @@ public class Main {
         EmployeeDao employeeDao = new EmployeeDao();
 
         LOGGER.info("Update and display: ");
-        Employee employee = new Employee(2, "Atilio", "Boher", "Tester", 1);
-        employeeDao.update(employee);
+        Employee employee = new Employee(2, "asd", "asd", "asd", 1);
+        employeeDao.update(employee, (long)employee.getId());
 
         employee = employeeDao.getById(2);
         LOGGER.info("getById: " + employee + "\n");
@@ -55,7 +55,7 @@ public class Main {
 
         LOGGER.info("Update and display: ");
         Animal animal = new Animal(1, "asd", 5, "asd", 1);
-        animalDao.update(animal);
+        animalDao.update(animal, (long)animal.getId());
 
         animal = animalDao.getById(1);
         LOGGER.info("getById: " + animal + "\n");
@@ -84,7 +84,7 @@ public class Main {
 
         LOGGER.info("Update and display: ");
         Department department = new Department(1, "asd", "description: sfasdf");
-        departmentDao.update(department);
+        departmentDao.update(department, (long)department.getId());
 
         department = departmentDao.getById(1);
         LOGGER.info("getById: " + department + "\n");
