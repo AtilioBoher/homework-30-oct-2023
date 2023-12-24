@@ -106,7 +106,7 @@ public class AnimalDao implements IAnimalDao {
     }
 
     @Override
-    public void removeById(int id) {
+    public void removeById(Long id) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -114,7 +114,7 @@ public class AnimalDao implements IAnimalDao {
                     "DELETE FROM animals " +
                             "WHERE id = ?"
             );
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
             LOGGER.error(e);

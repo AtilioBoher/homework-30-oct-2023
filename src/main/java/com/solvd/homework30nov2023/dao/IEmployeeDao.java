@@ -12,7 +12,7 @@ public interface IEmployeeDao extends IBaseDao<Employee> {
 
     void update(@Param("employee") Employee employee,@Param("id") Long id);
 
-    void removeById(int id);
+    void removeById(Long id);
 
     List<Employee> getAll();
 }

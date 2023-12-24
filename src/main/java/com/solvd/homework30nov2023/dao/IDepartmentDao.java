@@ -12,7 +12,7 @@ public interface IDepartmentDao extends IBaseDao<Department> {
 
     void update(Department department, Long id);
 
-    void removeById(int id);
+    void removeById(Long id);
 
     List<Department> getAll();
 }

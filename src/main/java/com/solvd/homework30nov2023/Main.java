@@ -43,7 +43,7 @@ public class Main {
         LOGGER.info("\n");
 
         LOGGER.info("Delete added entry and then display the entire table: ");
-        employeeDao.removeById(employee.getId());
+        employeeDao.removeById((long)employee.getId());
         employees = employeeDao.getAll();
         for (Employee e : employees) {
             LOGGER.info(e);
@@ -72,7 +72,7 @@ public class Main {
         LOGGER.info("\n");
 
         LOGGER.info("Delete added entry and then display the entire table: ");
-        animalDao.removeById(animal.getId());
+        animalDao.removeById((long)animal.getId());
         animals = animalDao.getAll();
         for (Animal a : animals) {
             LOGGER.info(a);
@@ -101,7 +101,7 @@ public class Main {
         LOGGER.info("\n");
 
         LOGGER.info("Delete added entry and then display the entire table: ");
-        departmentDao.removeById(department.getId());
+        departmentDao.removeById((long)department.getId());
         departments = departmentDao.getAll();
         for (Department d : departments) {
             LOGGER.info(d);

@@ -20,4 +20,8 @@
         years_of_exp = #{employee.yearsOfExperience}
         WHERE id = #{id}
     </update>
+    
+    <delete id="removeById">
+        DELETE FROM employees WHERE id = #{id}
+    </delete>
 </mapper>

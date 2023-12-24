@@ -10,7 +10,7 @@ public interface IBaseDao<T> {
 
     void update(T t, Long id);
 
-    void removeById(int id);
+    void removeById(Long id);
 
     List<T> getAll();
 }

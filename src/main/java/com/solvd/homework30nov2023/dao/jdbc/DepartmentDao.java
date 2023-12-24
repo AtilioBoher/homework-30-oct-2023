@@ -98,7 +98,7 @@ public class DepartmentDao implements IDepartmentDao {
     }
 
     @Override
-    public void removeById(int id) {
+    public void removeById(Long id) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -106,7 +106,7 @@ public class DepartmentDao implements IDepartmentDao {
                     "DELETE FROM departments " +
                             "WHERE id = ?"
             );
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();
         } catch (SQLException e) {
             LOGGER.error(e);
