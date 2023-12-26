@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.homework30nov2023.dao.IDepartmentDao">
+
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO departments
+        (name, description)
+        VALUES
+        (#{name}, #{description})
+    </insert>
+
+    <select id="getById" resultMap="DepartmentResultMap">
+        SELECT id, name, description
+        FROM departments WHERE id = #{id}
+    </select>
+    
+    <update id="update">
+        UPDATE departments SET
+        name = #{department.name},
+        description = #{department.description}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="removeById">
+        DELETE FROM departments WHERE id = #{id}
+    </delete>
+
+    <select id="getAll" resultMap="DepartmentResultMap">
+        SELECT * FROM departments
+    </select>
+
+    <resultMap id="DepartmentResultMap" type="com.solvd.homework30nov2023.model.Department" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+    </resultMap>
+</mapper>

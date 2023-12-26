@@ -1,7 +1,7 @@
 package com.solvd.homework30nov2023;
 
 import com.solvd.homework30nov2023.dao.mybatis.AnimalDao;
-import com.solvd.homework30nov2023.dao.jdbc.DepartmentDao;
+import com.solvd.homework30nov2023.dao.mybatis.DepartmentDao;
 import com.solvd.homework30nov2023.dao.mybatis.EmployeeDao;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
@@ -18,8 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
 //        employeeTest();
-        animalTest();
-//        departmentTest();
+//        animalTest();
+        departmentTest();
     }
 
     private static void employeeTest() {
