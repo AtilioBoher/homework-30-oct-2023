@@ -40,6 +40,5 @@
         <result column="last_name" property="lastName"/>
         <result column="position" property="position"/>
         <result column="years_of_exp" property="yearsOfExperience"/>
-
     </resultMap>
 </mapper>

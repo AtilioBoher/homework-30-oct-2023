@@ -2,7 +2,6 @@ package com.solvd.homework30nov2023.dao.mybatis;
 
 import com.solvd.homework30nov2023.dao.IEmployeeDao;
 import com.solvd.homework30nov2023.model.Employee;
-import com.solvd.homework30nov2023.model.exception.ResourceNotFoundException;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -44,7 +43,6 @@ public class EmployeeDao implements IEmployeeDao {
 
     @Override
     public List<Employee> getAll() {
-        List<Employee> employees = null;
         try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IEmployeeDao employeeDao = sqlSession.getMapper(IEmployeeDao.class);
             return employeeDao.getAll();

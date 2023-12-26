@@ -1,6 +1,6 @@
 package com.solvd.homework30nov2023;
 
-import com.solvd.homework30nov2023.dao.jdbc.AnimalDao;
+import com.solvd.homework30nov2023.dao.mybatis.AnimalDao;
 import com.solvd.homework30nov2023.dao.jdbc.DepartmentDao;
 import com.solvd.homework30nov2023.dao.mybatis.EmployeeDao;
 import com.solvd.homework30nov2023.model.Animal;
@@ -17,8 +17,8 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        employeeTest();
-//        animalTest();
+//        employeeTest();
+        animalTest();
 //        departmentTest();
     }
 
@@ -59,7 +59,7 @@ public class Main {
         AnimalDao animalDao = new AnimalDao();
 
         LOGGER.info("Update and display: ");
-        Animal animal = new Animal(1L, "asd", 5, "asd", 1L);
+        Animal animal = new Animal(1L, "myAnimal", 10, "miAnimal", 1L);
         animalDao.update(animal, animal.getId());
 
         Optional<Animal> optional = animalDao.getById(1L);

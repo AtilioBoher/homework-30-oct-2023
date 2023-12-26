@@ -19,5 +19,6 @@
 
     <mappers>
         <mapper resource="mappers/EmployeeMapper.xml"/>
+        <mapper resource="mappers/AnimalMapper.xml"/>
     </mappers>
 </configuration>
