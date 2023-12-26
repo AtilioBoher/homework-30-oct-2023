@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
 
@@ -25,11 +26,15 @@ public class Main {
         EmployeeDao employeeDao = new EmployeeDao();
 
         LOGGER.info("Update and display: ");
-        Employee employee = new Employee(2, "asd", "asd", "asd", 1);
+        Employee employee = new Employee(2L, "asd", "asd", "asd", 1);
         employeeDao.update(employee, (long)employee.getId());
 
-        employee = employeeDao.getById(2);
-        LOGGER.info("getById: " + employee + "\n");
+        Optional<Employee> optional = employeeDao.getById(2L);
+        if (optional.isPresent()) {
+            LOGGER.info("getById: " + optional.get() + "\n");
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
 
         LOGGER.info("Insert and then display the entire table: ");
         employee.setId(employeeDao.insert(employee));
@@ -54,11 +59,15 @@ public class Main {
         AnimalDao animalDao = new AnimalDao();
 
         LOGGER.info("Update and display: ");
-        Animal animal = new Animal(1, "asd", 5, "asd", 1);
+        Animal animal = new Animal(1L, "asd", 5, "asd", 1L);
         animalDao.update(animal, (long)animal.getId());
 
-        animal = animalDao.getById(1);
-        LOGGER.info("getById: " + animal + "\n");
+        Optional<Animal> optional = animalDao.getById(1L);
+        if (optional.isPresent()) {
+            LOGGER.info("getById: " + optional.get() + "\n");
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
 
         LOGGER.info("Insert and then display the entire table: ");
         animal.setId(animalDao.insert(animal));
@@ -83,11 +92,15 @@ public class Main {
         DepartmentDao departmentDao = new DepartmentDao();
 
         LOGGER.info("Update and display: ");
-        Department department = new Department(1, "asd", "description: sfasdf");
+        Department department = new Department(1L, "asd", "description: sfasdf");
         departmentDao.update(department, (long)department.getId());
 
-        department = departmentDao.getById(1);
-        LOGGER.info("getById: " + department + "\n");
+        Optional<Department> optional = departmentDao.getById(1L);
+        if (optional.isPresent()) {
+            LOGGER.info("getById: " + optional.get() + "\n");
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
 
         LOGGER.info("Insert and then display the entire table: ");
         department.setId(departmentDao.insert(department));

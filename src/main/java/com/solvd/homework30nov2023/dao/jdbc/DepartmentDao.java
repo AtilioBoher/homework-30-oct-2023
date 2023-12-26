@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DepartmentDao implements IDepartmentDao {
 
@@ -17,7 +18,7 @@ public class DepartmentDao implements IDepartmentDao {
     private static final Logger LOGGER = LogManager.getLogger(DepartmentDao.class);
 
     @Override
-    public Department getById(int id) {
+    public Optional<Department> getById(Long id) {
         Department department = new Department();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
@@ -26,11 +27,11 @@ public class DepartmentDao implements IDepartmentDao {
             preparedStatement = connection.prepareStatement(
                     "SELECT * FROM departments WHERE id = ?"
             );
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                department.setId(resultSet.getInt("id"));
+                department.setId(resultSet.getLong("id"));
                 department.setName(resultSet.getString("name"));
                 department.setDescription(resultSet.getString("description"));
             }
@@ -40,15 +41,15 @@ public class DepartmentDao implements IDepartmentDao {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
         }
-        return department;
+        return Optional.of(department);
     }
 
     @Override
-    public int insert(Department department) {
+    public Long insert(Department department) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        int generatedKey = 0;
+        long generatedKey = 0L;
         try {
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO departments " +
@@ -62,7 +63,7 @@ public class DepartmentDao implements IDepartmentDao {
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedKey = resultSet.getInt(1);
+                generatedKey = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
@@ -130,7 +131,7 @@ public class DepartmentDao implements IDepartmentDao {
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
                 Department department = new Department();
-                department.setId(resultSet.getInt("id"));
+                department.setId(resultSet.getLong("id"));
                 department.setName(resultSet.getString("name"));
                 department.setDescription(resultSet.getString("description"));
                 list.add(department);

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeeDao implements IEmployeeDao {
 
@@ -17,7 +18,7 @@ public class EmployeeDao implements IEmployeeDao {
     private static final Logger LOGGER = LogManager.getLogger(EmployeeDao.class);
 
     @Override
-    public Employee getById(int id) {
+    public Optional<Employee> getById(Long id) {
         Employee employee = new Employee();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
@@ -26,11 +27,11 @@ public class EmployeeDao implements IEmployeeDao {
             preparedStatement = connection.prepareStatement(
                     "SELECT * FROM employees WHERE id = ?"
             );
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                employee.setId(resultSet.getInt("id"));
+                employee.setId(resultSet.getLong("id"));
                 employee.setFirstName(resultSet.getString("first_name"));
                 employee.setLastName(resultSet.getString("last_name"));
                 employee.setPosition(resultSet.getString("position"));
@@ -42,15 +43,15 @@ public class EmployeeDao implements IEmployeeDao {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
         }
-        return employee;
+        return Optional.of(employee);
     }
 
     @Override
-    public int insert(Employee employee) {
+    public Long insert(Employee employee) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        int generatedKey = 0;
+        long generatedKey = 0L;
         try {
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO employees " +
@@ -66,7 +67,7 @@ public class EmployeeDao implements IEmployeeDao {
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedKey = resultSet.getInt(1);
+                generatedKey = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
@@ -138,7 +139,7 @@ public class EmployeeDao implements IEmployeeDao {
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
                 Employee employee = new Employee();
-                employee.setId(resultSet.getInt("id"));
+                employee.setId(resultSet.getLong("id"));
                 employee.setFirstName(resultSet.getString("first_name"));
                 employee.setLastName(resultSet.getString("last_name"));
                 employee.setPosition(resultSet.getString("position"));

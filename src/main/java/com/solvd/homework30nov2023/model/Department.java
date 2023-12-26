@@ -1,27 +1,27 @@
 package com.solvd.homework30nov2023.model;
 
 public class Department {
-    private int id;
+    private Long id;
     private String name;
     private String description;
 
-    public Department(int id, String name, String description) {
+    public Department(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
     public Department() {
-        this.id = 0;
+        this.id = 0L;
         this.name = "";
         this.description = "";
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,13 +1,13 @@
 package com.solvd.homework30nov2023.model;
 
 public class Animal {
-    private int id;
+    private Long id;
     private String name;
     private int age;
     private String specie;
-    private int attractionId;
+    private Long attractionId;
 
-    public Animal(int id, String name, int age, String specie, int atractionId) {
+    public Animal(Long id, String name, int age, String specie, Long atractionId) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -16,18 +16,18 @@ public class Animal {
     }
 
     public Animal() {
-        this.id = 0;
+        this.id = 0L;
         this.name = "";
         this.age = 0;
         this.specie = "";
-        this.attractionId = 0;
+        this.attractionId = 0L;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,11 +55,11 @@ public class Animal {
         this.specie = specie;
     }
 
-    public int getAttractionId() {
+    public Long getAttractionId() {
         return attractionId;
     }
 
-    public void setAttractionId(int attractionId) {
+    public void setAttractionId(Long attractionId) {
         this.attractionId = attractionId;
     }
 

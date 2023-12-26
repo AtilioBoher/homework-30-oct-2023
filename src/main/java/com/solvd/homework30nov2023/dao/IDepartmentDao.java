@@ -3,12 +3,13 @@ package com.solvd.homework30nov2023.dao;
 import com.solvd.homework30nov2023.model.Department;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IDepartmentDao extends IBaseDao<Department> {
 
-    Department getById(int id);
+    Optional<Department> getById(Long id);
 
-    int insert(Department department);
+    Long insert(Department department);
 
     void update(Department department, Long id);
 

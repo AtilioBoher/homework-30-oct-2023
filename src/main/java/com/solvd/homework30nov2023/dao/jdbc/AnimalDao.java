@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AnimalDao implements IAnimalDao {
 
@@ -17,7 +18,7 @@ public class AnimalDao implements IAnimalDao {
     private static final Logger LOGGER = LogManager.getLogger(AnimalDao.class);
 
     @Override
-    public Animal getById(int id) {
+    public Optional<Animal> getById(Long id) {
         Animal animal = new Animal();
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
@@ -26,15 +27,15 @@ public class AnimalDao implements IAnimalDao {
             preparedStatement = connection.prepareStatement(
                     "SELECT * FROM animals WHERE id = ?"
             );
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
-                animal.setId(resultSet.getInt("id"));
+                animal.setId(resultSet.getLong("id"));
                 animal.setName(resultSet.getString("name"));
                 animal.setAge(resultSet.getInt("age"));
                 animal.setSpecie(resultSet.getString("specie"));
-                animal.setAttractionId(resultSet.getInt("attraction_id"));
+                animal.setAttractionId(resultSet.getLong("attraction_id"));
             }
         } catch (SQLException e) {
             LOGGER.error(e);
@@ -42,15 +43,15 @@ public class AnimalDao implements IAnimalDao {
             connectionPool.releaseConnection(connection);
             Utils.closeAll(resultSet, preparedStatement);
         }
-        return animal;
+        return Optional.of(animal);
     }
 
     @Override
-    public int insert(Animal animal) {
+    public Long insert(Animal animal) {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        int generatedKey = 0;
+        long generatedKey = 0L;
         try {
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO animals " +
@@ -62,11 +63,11 @@ public class AnimalDao implements IAnimalDao {
             preparedStatement.setString(1, animal.getName());
             preparedStatement.setInt(2, animal.getAge());
             preparedStatement.setString(3, animal.getSpecie());
-            preparedStatement.setInt(4, animal.getAttractionId());
+            preparedStatement.setLong(4, animal.getAttractionId());
             preparedStatement.execute();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                generatedKey = resultSet.getInt(1);
+                generatedKey = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
@@ -93,7 +94,7 @@ public class AnimalDao implements IAnimalDao {
             preparedStatement.setString(1, animal.getName());
             preparedStatement.setInt(2, animal.getAge());
             preparedStatement.setString(3, animal.getSpecie());
-            preparedStatement.setInt(4, animal.getAttractionId());
+            preparedStatement.setLong(4, animal.getAttractionId());
             preparedStatement.setLong(5, id);
             preparedStatement.execute();
 
@@ -138,11 +139,11 @@ public class AnimalDao implements IAnimalDao {
             resultSet = preparedStatement.getResultSet();
             while (resultSet.next()) {
                 Animal animal = new Animal();
-                animal.setId(resultSet.getInt("id"));
+                animal.setId(resultSet.getLong("id"));
                 animal.setName(resultSet.getString("name"));
                 animal.setAge(resultSet.getInt("age"));
                 animal.setSpecie(resultSet.getString("specie"));
-                animal.setAttractionId(resultSet.getInt("attraction_id"));
+                animal.setAttractionId(resultSet.getLong("attraction_id"));
                 list.add(animal);
             }
         } catch (SQLException e) {

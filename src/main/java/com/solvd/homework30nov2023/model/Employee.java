@@ -1,13 +1,13 @@
 package com.solvd.homework30nov2023.model;
 
 public class Employee {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String position;
     private int yearsOfExperience;
 
-    public Employee(int id, String firstName, String lastName, String position, int yearsOfExperience) {
+    public Employee(Long id, String firstName, String lastName, String position, int yearsOfExperience) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -16,18 +16,18 @@ public class Employee {
     }
 
     public Employee() {
-        this.id = 0;
+        this.id = 0L;
         this.firstName = "";
         this.lastName = "";
         this.position = "";
         this.yearsOfExperience = 0;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
