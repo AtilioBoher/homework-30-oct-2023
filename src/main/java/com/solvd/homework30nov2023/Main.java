@@ -92,7 +92,7 @@ public class Main {
         DepartmentDao departmentDao = new DepartmentDao();
 
         LOGGER.info("Update and display: ");
-        Department department = new Department(1L, "asd", "description: sfasdf");
+        Department department = new Department(1L, "asd", "description: sfasdf", null);
         departmentDao.update(department, (long)department.getId());
 
         Optional<Department> optional = departmentDao.getById(1L);

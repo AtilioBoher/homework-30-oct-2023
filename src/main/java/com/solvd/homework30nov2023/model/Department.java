@@ -1,14 +1,18 @@
 package com.solvd.homework30nov2023.model;
 
+import java.util.List;
+
 public class Department {
     private Long id;
     private String name;
     private String description;
+    private List<Employee> employees;
 
-    public Department(Long id, String name, String description) {
+    public Department(Long id, String name, String description, List<Employee> employees) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.employees = employees;
     }
 
     public Department() {
@@ -41,12 +45,21 @@ public class Department {
         this.description = description;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", employees=" + employees +
                 '}';
     }
 }
