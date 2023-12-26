@@ -1,9 +1,7 @@
 package com.solvd.homework30nov2023.dao.jdbc;
 
 import com.solvd.homework30nov2023.dao.IAnimalDao;
-import com.solvd.homework30nov2023.dao.Utils;
 import com.solvd.homework30nov2023.model.Animal;
-import com.solvd.homework30nov2023.dao.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

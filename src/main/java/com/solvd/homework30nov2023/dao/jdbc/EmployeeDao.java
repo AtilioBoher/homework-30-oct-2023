@@ -1,8 +1,6 @@
 package com.solvd.homework30nov2023.dao.jdbc;
 
 import com.solvd.homework30nov2023.dao.IEmployeeDao;
-import com.solvd.homework30nov2023.dao.Utils;
-import com.solvd.homework30nov2023.dao.ConnectionPool;
 import com.solvd.homework30nov2023.model.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

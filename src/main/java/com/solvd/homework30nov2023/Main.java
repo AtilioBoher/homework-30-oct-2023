@@ -2,7 +2,7 @@ package com.solvd.homework30nov2023;
 
 import com.solvd.homework30nov2023.dao.jdbc.AnimalDao;
 import com.solvd.homework30nov2023.dao.jdbc.DepartmentDao;
-import com.solvd.homework30nov2023.dao.jdbc.EmployeeDao;
+import com.solvd.homework30nov2023.dao.mybatis.EmployeeDao;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
 import com.solvd.homework30nov2023.model.Employee;
@@ -18,16 +18,16 @@ public class Main {
 
     public static void main(String[] args) {
         employeeTest();
-        animalTest();
-        departmentTest();
+//        animalTest();
+//        departmentTest();
     }
 
     private static void employeeTest() {
         EmployeeDao employeeDao = new EmployeeDao();
 
         LOGGER.info("Update and display: ");
-        Employee employee = new Employee(2L, "asd", "asd", "asd", 1);
-        employeeDao.update(employee, (long)employee.getId());
+        Employee employee = new Employee(2L, "Atilio", "Boher", "Tester", 10);
+        employeeDao.update(employee, employee.getId());
 
         Optional<Employee> optional = employeeDao.getById(2L);
         if (optional.isPresent()) {
@@ -39,16 +39,16 @@ public class Main {
         LOGGER.info("Insert and then display the entire table: ");
         employee.setId(employeeDao.insert(employee));
         LOGGER.info("Generated Id of the new entry: " + employee.getId());
-
+//
         List<Employee> employees = employeeDao.getAll();
         for (Employee e : employees) {
             LOGGER.info(e);
         }
-
+//
         LOGGER.info("\n");
-
+//
         LOGGER.info("Delete added entry and then display the entire table: ");
-        employeeDao.removeById((long)employee.getId());
+        employeeDao.removeById(employee.getId());
         employees = employeeDao.getAll();
         for (Employee e : employees) {
             LOGGER.info(e);
@@ -60,7 +60,7 @@ public class Main {
 
         LOGGER.info("Update and display: ");
         Animal animal = new Animal(1L, "asd", 5, "asd", 1L);
-        animalDao.update(animal, (long)animal.getId());
+        animalDao.update(animal, animal.getId());
 
         Optional<Animal> optional = animalDao.getById(1L);
         if (optional.isPresent()) {
@@ -81,7 +81,7 @@ public class Main {
         LOGGER.info("\n");
 
         LOGGER.info("Delete added entry and then display the entire table: ");
-        animalDao.removeById((long)animal.getId());
+        animalDao.removeById(animal.getId());
         animals = animalDao.getAll();
         for (Animal a : animals) {
             LOGGER.info(a);
@@ -93,7 +93,7 @@ public class Main {
 
         LOGGER.info("Update and display: ");
         Department department = new Department(1L, "asd", "description: sfasdf", null);
-        departmentDao.update(department, (long)department.getId());
+        departmentDao.update(department, department.getId());
 
         Optional<Department> optional = departmentDao.getById(1L);
         if (optional.isPresent()) {
@@ -114,7 +114,7 @@ public class Main {
         LOGGER.info("\n");
 
         LOGGER.info("Delete added entry and then display the entire table: ");
-        departmentDao.removeById((long)department.getId());
+        departmentDao.removeById(department.getId());
         departments = departmentDao.getAll();
         for (Department d : departments) {
             LOGGER.info(d);

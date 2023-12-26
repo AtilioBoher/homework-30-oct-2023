@@ -1,4 +1,4 @@
-package com.solvd.homework30nov2023.dao;
+package com.solvd.homework30nov2023.dao.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

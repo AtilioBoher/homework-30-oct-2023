@@ -11,6 +11,11 @@
         VALUES
         (#{firstName}, #{lastName}, #{position}, #{yearsOfExperience})
     </insert>
+
+    <select id="getById" resultMap="EmployeeResultMap">
+        SELECT id, first_name, last_name, position, years_of_exp
+        FROM employees WHERE id = #{id}
+    </select>
     
     <update id="update">
         UPDATE employees SET
@@ -24,4 +29,17 @@
     <delete id="removeById">
         DELETE FROM employees WHERE id = #{id}
     </delete>
+
+    <select id="getAll" resultMap="EmployeeResultMap">
+        SELECT * FROM employees
+    </select>
+
+    <resultMap id="EmployeeResultMap" type="com.solvd.homework30nov2023.model.Employee" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+        <result column="position" property="position"/>
+        <result column="years_of_exp" property="yearsOfExperience"/>
+
+    </resultMap>
 </mapper>
