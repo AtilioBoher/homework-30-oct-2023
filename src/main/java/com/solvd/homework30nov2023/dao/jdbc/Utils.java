@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class Utils {
     private static final Logger LOGGER = LogManager.getLogger(Utils.class);
+
     public static void closeAll(ResultSet resultSet, PreparedStatement preparedStatement) {
         if (resultSet != null) {
             try {

@@ -5,6 +5,20 @@
 
 <mapper namespace="com.solvd.homework30nov2023.dao.IDepartmentDao">
 
+    <sql id="select-with-join">
+        SELECT
+        d.id,
+        d.name,
+        d.description,
+        e.id as employee_id,
+        e.first_name as employee_first_name,
+        e.last_name as employee_last_name,
+        e.position as employee_position,
+        e.years_of_exp as employee_years_of_exp
+        FROM departments d
+        LEFT JOIN employees e on e.department_id = d.id
+    </sql>
+
     <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO departments
         (name, description)
@@ -13,8 +27,8 @@
     </insert>
 
     <select id="getById" resultMap="DepartmentResultMap">
-        SELECT id, name, description
-        FROM departments WHERE id = #{id}
+        <include refid="select-with-join"/>
+        WHERE d.id = #{id}
     </select>
     
     <update id="update">
@@ -29,12 +43,14 @@
     </delete>
 
     <select id="getAll" resultMap="DepartmentResultMap">
-        SELECT * FROM departments
+        <include refid="select-with-join"/>
     </select>
 
     <resultMap id="DepartmentResultMap" type="com.solvd.homework30nov2023.model.Department" autoMapping="false">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
+        <collection property="employees" columnPrefix="employee_"
+                    resultMap="com.solvd.homework30nov2023.dao.IEmployeeDao.EmployeeResultMap"/>
     </resultMap>
 </mapper>

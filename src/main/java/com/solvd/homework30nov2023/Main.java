@@ -17,8 +17,8 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-//        employeeTest();
-//        animalTest();
+        employeeTest();
+        animalTest();
         departmentTest();
     }
 
@@ -92,7 +92,7 @@ public class Main {
         DepartmentDao departmentDao = new DepartmentDao();
 
         LOGGER.info("Update and display: ");
-        Department department = new Department(1L, "asd", "description: sfasdf", null);
+        Department department = new Department(1L, "asd", "description: asd", null);
         departmentDao.update(department, department.getId());
 
         Optional<Department> optional = departmentDao.getById(1L);

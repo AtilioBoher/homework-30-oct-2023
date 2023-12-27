@@ -1,7 +1,6 @@
 package com.solvd.homework30nov2023.dao.mybatis;
 
 import com.solvd.homework30nov2023.dao.IDepartmentDao;
-import com.solvd.homework30nov2023.dao.IEmployeeDao;
 import com.solvd.homework30nov2023.model.Department;
 import org.apache.ibatis.session.SqlSession;
 
@@ -19,7 +18,7 @@ public class DepartmentDao implements IDepartmentDao {
 
     @Override
     public Long insert(Department department) {
-        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)){
+        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IDepartmentDao departmentDao = sqlSession.getMapper(IDepartmentDao.class);
             departmentDao.insert(department);
             return department.getId();
@@ -28,7 +27,7 @@ public class DepartmentDao implements IDepartmentDao {
 
     @Override
     public void update(Department department, Long id) {
-        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)){
+        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IDepartmentDao departmentDao = sqlSession.getMapper(IDepartmentDao.class);
             departmentDao.update(department, id);
         }
@@ -36,7 +35,7 @@ public class DepartmentDao implements IDepartmentDao {
 
     @Override
     public void removeById(Long id) {
-        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)){
+        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IDepartmentDao departmentDao = sqlSession.getMapper(IDepartmentDao.class);
             departmentDao.removeById(id);
         }

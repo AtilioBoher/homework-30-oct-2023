@@ -18,7 +18,7 @@ public class EmployeeDao implements IEmployeeDao {
 
     @Override
     public Long insert(Employee employee) {
-        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)){
+        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IEmployeeDao employeeDao = sqlSession.getMapper(IEmployeeDao.class);
             employeeDao.insert(employee);
             return employee.getId();
@@ -27,7 +27,7 @@ public class EmployeeDao implements IEmployeeDao {
 
     @Override
     public void update(Employee employee, Long id) {
-        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)){
+        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IEmployeeDao employeeDao = sqlSession.getMapper(IEmployeeDao.class);
             employeeDao.update(employee, id);
         }
@@ -35,7 +35,7 @@ public class EmployeeDao implements IEmployeeDao {
 
     @Override
     public void removeById(Long id) {
-        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)){
+        try (SqlSession sqlSession = PersistenceConfig.getSessionFactory().openSession(true)) {
             IEmployeeDao employeeDao = sqlSession.getMapper(IEmployeeDao.class);
             employeeDao.removeById(id);
         }

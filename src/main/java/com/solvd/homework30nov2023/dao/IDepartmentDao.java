@@ -12,7 +12,7 @@ public interface IDepartmentDao extends IBaseDao<Department> {
 
     Long insert(Department department);
 
-    void update(@Param("department") Department department,@Param("id") Long id);
+    void update(@Param("department") Department department, @Param("id") Long id);
 
     void removeById(Long id);
 

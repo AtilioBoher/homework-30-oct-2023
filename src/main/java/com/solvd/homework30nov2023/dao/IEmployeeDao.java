@@ -11,7 +11,7 @@ public interface IEmployeeDao extends IBaseDao<Employee> {
 
     Long insert(Employee employee);
 
-    void update(@Param("employee") Employee employee,@Param("id") Long id);
+    void update(@Param("employee") Employee employee, @Param("id") Long id);
 
     void removeById(Long id);
 
