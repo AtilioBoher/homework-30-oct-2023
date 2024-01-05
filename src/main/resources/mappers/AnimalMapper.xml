@@ -16,7 +16,7 @@
         SELECT id, name, age, specie, attraction_id
         FROM animals WHERE id = #{id}
     </select>
-    
+
     <update id="update">
         UPDATE animals SET
         name = #{animal.name},
@@ -25,7 +25,7 @@
         attraction_id = #{animal.attractionId}
         WHERE id = #{id}
     </update>
-    
+
     <delete id="removeById">
         DELETE FROM animals WHERE id = #{id}
     </delete>
@@ -34,7 +34,9 @@
         SELECT * FROM animals
     </select>
 
-    <resultMap id="AnimalResultMap" type="com.solvd.homework30nov2023.model.Animal" autoMapping="false">
+    <resultMap id="AnimalResultMap"
+               type="com.solvd.homework30nov2023.model.Animal"
+               autoMapping="false">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="age" property="age"/>

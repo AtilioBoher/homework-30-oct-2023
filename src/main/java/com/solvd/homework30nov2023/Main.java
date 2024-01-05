@@ -4,13 +4,14 @@ import com.solvd.homework30nov2023.dao.mybatis.AnimalDao;
 import com.solvd.homework30nov2023.dao.mybatis.DepartmentDao;
 import com.solvd.homework30nov2023.dao.mybatis.EmployeeDao;
 import com.solvd.homework30nov2023.model.*;
+import com.solvd.homework30nov2023.model.parser.XmlDomParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.*;
-import java.io.File;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -131,52 +132,18 @@ public class Main {
 
     private static void xmlParsingHomeTask() {
         dom();
-
-        try {
-            sax();
-        } catch (Exception e) {
-            LOGGER.error(e);
-        }
+        // I wanted to try sax too
+//        try {
+//            sax();
+//        } catch (Exception e) {
+//            LOGGER.error(e);
+//        }
     }
 
     private static void dom() {
-        DocumentBuilder builder = null;
-        Document doc = null;
-        try {
-            builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            doc = builder.parse(new File("src/main/resources/example_jdom.xml"));
-            doc.getDocumentElement().normalize();
-        } catch (Exception e) {
-            LOGGER.error(e);
-        }
-        NodeList nodeList = doc.getElementsByTagName("person");
-        LOGGER.info(String.format("N° of Nodes: %s", nodeList.getLength()));
-        Node firstNode = nodeList.item(0);
-        LOGGER.info(String.format("First Node info: NodeType=%d NodeName=%s\n",
-                firstNode.getNodeType(),
-                firstNode.getNodeName()));
-
-        NamedNodeMap attrList = firstNode.getAttributes();
-        LOGGER.info(String.format("First Node's attribute info: NodeName=%s NodeValue=%s\n",
-                attrList.item(0).getNodeName(),
-                attrList.item(0).getNodeValue()));
-
-        NodeList childNode = firstNode.getChildNodes();
-        int n = childNode.getLength();
-        Node current;
-        for (int i=0; i<n; i++) {
-            current = childNode.item(i);
-            if(current.getNodeType() == Node.ELEMENT_NODE) {
-                System.out.println(
-                        current.getNodeName() + ": " + current.getTextContent());
-            }
-        }
-
-        nodeList = doc.getElementsByTagName("person");
-        Element first = (Element) nodeList.item(0);
-        LOGGER.info(String.format("Attribute before being modified: %s", first.getAttribute("id")));
-        first.setAttribute("id", "5");
-        LOGGER.info(String.format("Attribute after being modified: %s\n", first.getAttribute("id")));
+        String filePath = "src/main/resources/example_jdom.xml";
+        List<Animal> animals = XmlDomParser.readAnimals(filePath);
+        animals.forEach(LOGGER::info);
     }
 
     private static void sax() throws ParserConfigurationException, SAXException, IOException {

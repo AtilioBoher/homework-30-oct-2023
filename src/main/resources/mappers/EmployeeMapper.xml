@@ -16,7 +16,7 @@
         SELECT id, first_name, last_name, position, years_of_exp
         FROM employees WHERE id = #{id}
     </select>
-    
+
     <update id="update">
         UPDATE employees SET
         first_name = #{employee.firstName},
@@ -25,7 +25,7 @@
         years_of_exp = #{employee.yearsOfExperience}
         WHERE id = #{id}
     </update>
-    
+
     <delete id="removeById">
         DELETE FROM employees WHERE id = #{id}
     </delete>
@@ -34,7 +34,9 @@
         SELECT * FROM employees
     </select>
 
-    <resultMap id="EmployeeResultMap" type="com.solvd.homework30nov2023.model.Employee" autoMapping="false">
+    <resultMap id="EmployeeResultMap"
+               type="com.solvd.homework30nov2023.model.Employee"
+               autoMapping="false">
         <id column="id" property="id"/>
         <result column="first_name" property="firstName"/>
         <result column="last_name" property="lastName"/>

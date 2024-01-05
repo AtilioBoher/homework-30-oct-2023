@@ -30,14 +30,14 @@
         <include refid="select-with-join"/>
         WHERE d.id = #{id}
     </select>
-    
+
     <update id="update">
         UPDATE departments SET
         name = #{department.name},
         description = #{department.description}
         WHERE id = #{id}
     </update>
-    
+
     <delete id="removeById">
         DELETE FROM departments WHERE id = #{id}
     </delete>
@@ -46,7 +46,9 @@
         <include refid="select-with-join"/>
     </select>
 
-    <resultMap id="DepartmentResultMap" type="com.solvd.homework30nov2023.model.Department" autoMapping="false">
+    <resultMap id="DepartmentResultMap"
+               type="com.solvd.homework30nov2023.model.Department"
+               autoMapping="false">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>

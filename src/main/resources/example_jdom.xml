@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
-<people>
-    <person id="1">
-        <name>
-            <first>Atilio</first>
-            <last>Boher</last>
-        </name>
-        <age>26</age>
-        <date>1997-03-22</date>
-        <cars>
-            <value>Ferrari</value>
-            <value>BMW</value>
-        </cars>
-    </person>
-    <person>
-        <first_name>Juan</first_name>
+<animals>
+    <animal id="1">
+        <name>Spike</name>
+        <age>5</age>
+        <specie>dog</specie>
+        <attractionId>1</attractionId>
+    </animal>
+    <animal id="2">
+        <name>Rita</name>
         <age>10</age>
-        <date>2021-10-11</date>
-    </person>
-</people>
+        <specie>dog</specie>
+        <attractionId>1</attractionId>
+    </animal>
+    <animal id="3">
+        <name>Chandoso</name>
+        <age>3</age>
+        <specie>dog</specie>
+        <attractionId>5</attractionId>
+    </animal>
+</animals>
