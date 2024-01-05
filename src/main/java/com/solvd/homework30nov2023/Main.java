@@ -3,16 +3,13 @@ package com.solvd.homework30nov2023;
 import com.solvd.homework30nov2023.dao.mybatis.AnimalDao;
 import com.solvd.homework30nov2023.dao.mybatis.DepartmentDao;
 import com.solvd.homework30nov2023.dao.mybatis.EmployeeDao;
-import com.solvd.homework30nov2023.model.*;
+import com.solvd.homework30nov2023.model.Animal;
+import com.solvd.homework30nov2023.model.Department;
+import com.solvd.homework30nov2023.model.Employee;
 import com.solvd.homework30nov2023.model.parser.XmlDomParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -132,12 +129,6 @@ public class Main {
 
     private static void xmlParsingHomeTask() {
         dom();
-        // I wanted to try sax too
-//        try {
-//            sax();
-//        } catch (Exception e) {
-//            LOGGER.error(e);
-//        }
     }
 
     private static void dom() {
@@ -146,18 +137,5 @@ public class Main {
         animals.forEach(LOGGER::info);
     }
 
-    private static void sax() throws ParserConfigurationException, SAXException, IOException {
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser saxParser = factory.newSAXParser();
-        Handler peopleHandler = new Handler();
-
-        saxParser.parse("src/main/resources/example_jsax.xml", peopleHandler);
-
-        People people = peopleHandler.getPeople();
-
-        List<Person> personList = people.getPeople();
-
-        personList.forEach(LOGGER::info);
-    }
 
 }
