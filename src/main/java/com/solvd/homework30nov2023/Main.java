@@ -6,6 +6,7 @@ import com.solvd.homework30nov2023.dao.mybatis.EmployeeDao;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
 import com.solvd.homework30nov2023.model.Employee;
+import com.solvd.homework30nov2023.model.parser.JsonJacksonParser;
 import com.solvd.homework30nov2023.model.parser.XmlDomParser;
 import com.solvd.homework30nov2023.model.parser.XmlJaxbParser;
 import org.apache.logging.log4j.LogManager;
@@ -133,6 +134,8 @@ public class Main {
         dom();
         LOGGER.info("------------------------JAXB parser------------------------------");
         jaxb();
+        LOGGER.info("------------------------JSON parser------------------------------");
+        json();
     }
 
     private static void dom() {
@@ -147,5 +150,9 @@ public class Main {
         animals.forEach(LOGGER::info);
     }
 
-
+    private static void json() {
+        String filePath = "src/main/resources/animals.json";
+        List<Animal> animals = JsonJacksonParser.readAnimals(filePath);
+        animals.forEach(LOGGER::info);
+    }
 }

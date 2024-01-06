@@ -17,6 +17,12 @@ import java.util.List;
 public class XmlDomParser {
     private static final Logger LOGGER = LogManager.getLogger(XmlDomParser.class);
 
+    /**
+     * Parse an XML file in search for a list of Animal instances using the DOM library
+     *
+     * @param filePath Path to the XML file
+     * @return List of the animals found in the XML file
+     */
     public static List<Animal> readAnimals(String filePath) {
         List<Animal> animals = new LinkedList<>();
         NodeList nodeList = getNodeList(filePath, "animal");
@@ -32,23 +38,27 @@ public class XmlDomParser {
 
     private static void readAnimalElements(Node node, Animal animal) {
         NodeList childs = node.getChildNodes();
-        Node current;
+        Node currentNode;
         for (int j = 0; j < childs.getLength(); j++) {
-            current = childs.item(j);
-            if (current.getNodeType() == Node.ELEMENT_NODE) {
-                switch (current.getNodeName()) {
-                    case "name":
-                        animal.setName(current.getTextContent());
-                        break;
-                    case "age":
-                        animal.setAge(Integer.parseInt(current.getTextContent()));
-                        break;
-                    case "specie":
-                        animal.setSpecie(current.getTextContent());
-                        break;
-                    case "attractionId":
-                        animal.setAttractionId(Long.parseLong(current.getTextContent()));
-                }
+            currentNode = childs.item(j);
+            searchForFields(animal, currentNode);
+        }
+    }
+
+    private static void searchForFields(Animal animal, Node current) {
+        if (current.getNodeType() == Node.ELEMENT_NODE) {
+            switch (current.getNodeName()) {
+                case "name":
+                    animal.setName(current.getTextContent());
+                    break;
+                case "age":
+                    animal.setAge(Integer.parseInt(current.getTextContent()));
+                    break;
+                case "specie":
+                    animal.setSpecie(current.getTextContent());
+                    break;
+                case "attractionId":
+                    animal.setAttractionId(Long.parseLong(current.getTextContent()));
             }
         }
     }

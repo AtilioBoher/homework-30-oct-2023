@@ -14,6 +14,12 @@ import java.util.List;
 public class XmlJaxbParser {
     private static final Logger LOGGER = LogManager.getLogger(XmlJaxbParser.class);
 
+    /**
+     * Parse an XML file in search for a list of Animal instances using the JAXB library
+     *
+     * @param filePath Path to the XML file
+     * @return List of the animals found in the XML file
+     */
     public static List<Animal> readAnimals(String filePath) {
         Animals animals = new Animals(); // This is like a wrapper object, because JAXB parse the root elements, which is "animals"
         try {
