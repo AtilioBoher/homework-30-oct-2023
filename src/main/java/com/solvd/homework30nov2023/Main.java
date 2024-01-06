@@ -7,6 +7,7 @@ import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
 import com.solvd.homework30nov2023.model.Employee;
 import com.solvd.homework30nov2023.model.parser.XmlDomParser;
+import com.solvd.homework30nov2023.model.parser.XmlJaxbParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -128,12 +129,21 @@ public class Main {
     }
 
     private static void xmlParsingHomeTask() {
+        LOGGER.info("-------------------------DOM parser------------------------------");
         dom();
+        LOGGER.info("------------------------JAXB parser------------------------------");
+        jaxb();
     }
 
     private static void dom() {
-        String filePath = "src/main/resources/example_jdom.xml";
+        String filePath = "src/main/resources/animals.xml";
         List<Animal> animals = XmlDomParser.readAnimals(filePath);
+        animals.forEach(LOGGER::info);
+    }
+
+    private static void jaxb() {
+        String filePath = "src/main/resources/animals.xml";
+        List<Animal> animals = XmlJaxbParser.readAnimals(filePath);
         animals.forEach(LOGGER::info);
     }
 

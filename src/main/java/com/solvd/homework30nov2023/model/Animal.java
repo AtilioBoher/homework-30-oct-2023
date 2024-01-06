@@ -1,6 +1,12 @@
 package com.solvd.homework30nov2023.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Animal {
+    @XmlAttribute
     private Long id;
     private String name;
     private int age;
