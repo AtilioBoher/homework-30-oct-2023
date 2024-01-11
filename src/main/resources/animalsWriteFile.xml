@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<animals>
+    <animal id="1">
+        <name>Spike</name>
+        <age>5</age>
+        <specie>dog</specie>
+        <attractionId>1</attractionId>
+    </animal>
+    <animal id="2">
+        <name>Rita</name>
+        <age>10</age>
+        <specie>dog</specie>
+        <attractionId>1</attractionId>
+    </animal>
+    <animal id="3">
+        <name>Chandoso</name>
+        <age>3</age>
+        <specie>dog</specie>
+        <attractionId>5</attractionId>
+    </animal>
+</animals>

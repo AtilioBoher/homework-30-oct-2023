@@ -13,6 +13,14 @@ public class Animals {
     @XmlElement(name = "animal")
     private List<Animal> animals = null;
 
+    public Animals(List<Animal> animals) {
+        this.animals = animals;
+    }
+
+    public Animals() {
+        this.animals = null;
+    }
+
     public List<Animal> getAnimals() {
         return animals;
     }
