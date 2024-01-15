@@ -3,8 +3,7 @@ package com.solvd.homework30nov2023;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.solvd.homework30nov2023.homework.MyBatisHomework.myBatisHomeTask;
-import static com.solvd.homework30nov2023.homework.XmlParsingHomework.xmlParsingHomeTask;
+import static com.solvd.homework30nov2023.homework.DesignPatternsHomework.designPatternsHomework;
 
 public class Main {
 
@@ -12,7 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 //        myBatisHomeTask();
-        xmlParsingHomeTask();
+//        xmlParsingHomeTask();
+        designPatternsHomework();
     }
 
 
