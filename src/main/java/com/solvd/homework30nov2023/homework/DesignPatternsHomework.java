@@ -3,6 +3,7 @@ package com.solvd.homework30nov2023.homework;
 import com.solvd.homework30nov2023.dao.IAnimalDao;
 import com.solvd.homework30nov2023.dao.IDepartmentDao;
 import com.solvd.homework30nov2023.dao.IEmployeeDao;
+import com.solvd.homework30nov2023.designPatterns.factory.RelationalRepositoriesFactory;
 import com.solvd.homework30nov2023.designPatterns.factory.RepositoriesFactory;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
@@ -16,10 +17,8 @@ public class DesignPatternsHomework {
     private static final Logger LOGGER = LogManager.getLogger(DesignPatternsHomework.class);
 
     public static void designPatternsHomework() {
-        LOGGER.info("-------------------------Factory Pattern----------------------------");
-        factory();
-        LOGGER.info("-------------------------Factory Pattern---------------------------");
-        LOGGER.info("-------------------------Abstract Factory Pattern------------------");
+//        factory();
+        abstractFactory();
         LOGGER.info("-------------------------Builder Pattern---------------------------");
         LOGGER.info("-------------------------Listener Pattern--------------------------");
         LOGGER.info("-------------------------Facade Pattern----------------------------");
@@ -30,6 +29,35 @@ public class DesignPatternsHomework {
     }
 
     private static void factory() {
+        LOGGER.info("Employee Dao:");
+        IEmployeeDao employeeDao = RelationalRepositoriesFactory.createEmployeeDao();
+        Optional<Employee> employee = employeeDao.getById(2L);
+        if (employee.isPresent()) {
+            LOGGER.info("getById: " + employee.get());
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
+
+        LOGGER.info("Animal Dao:");
+        IAnimalDao animalDao = RelationalRepositoriesFactory.createAnimalDao();
+        Optional<Animal> animal = animalDao.getById(1L);
+        if (animal.isPresent()) {
+            LOGGER.info("getById: " + animal.get());
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
+
+        LOGGER.info("Department Dao:");
+        IDepartmentDao departmentDao = RelationalRepositoriesFactory.createDepartmentDao();
+        Optional<Department> department = departmentDao.getById(1L);
+        if (department.isPresent()) {
+            LOGGER.info("getById: " + department.get());
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
+    }
+
+    private static void abstractFactory() {
         LOGGER.info("Employee Dao:");
         IEmployeeDao employeeDao = RepositoriesFactory.createEmployeeDao();
         Optional<Employee> employee = employeeDao.getById(2L);
@@ -57,5 +85,4 @@ public class DesignPatternsHomework {
             LOGGER.info("getById: Entry not found");
         }
     }
-
 }

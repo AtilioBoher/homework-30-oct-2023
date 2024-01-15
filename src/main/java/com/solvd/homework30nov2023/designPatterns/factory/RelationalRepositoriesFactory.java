@@ -10,8 +10,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class RepositoriesFactory {
-    private static final Logger LOGGER = LogManager.getLogger(RepositoriesFactory.class);
+public class RelationalRepositoriesFactory {
+    private static final Logger LOGGER = LogManager.getLogger(RelationalRepositoriesFactory.class);
     private static final Properties p = new Properties();
     private static final String type;
     private static final String errorMessage;
@@ -22,17 +22,17 @@ public class RepositoriesFactory {
         } catch (IOException e) {
             LOGGER.info(e);
         }
-        type = p.getProperty("db.type");
-        errorMessage = String.format("Unable to create database of type %s", type);
+        type = p.getProperty("db.implementation");
+        errorMessage = String.format("Unable to create object of type %s", type);
     }
 
 
     public static IAnimalDao createAnimalDao() {
         switch (type) {
-            case "RELATIONAL":
-                return RelationalRepositoriesFactory.createAnimalDao();
-            case "NONRELATIONAL":
-                return NonRelationalRepositoriesFactory.createAnimalDao();
+            case "JDBC":
+                return new com.solvd.homework30nov2023.dao.jdbc.AnimalDao();
+            case "MYBATIS":
+                return new com.solvd.homework30nov2023.dao.mybatis.AnimalDao();
             default:
                 RuntimeException error = new RuntimeException(errorMessage);
                 LOGGER.error(error);
@@ -42,10 +42,10 @@ public class RepositoriesFactory {
 
     public static IDepartmentDao createDepartmentDao() {
         switch (type) {
-            case "RELATIONAL":
-                return RelationalRepositoriesFactory.createDepartmentDao();
-            case "NONRELATIONAL":
-                return NonRelationalRepositoriesFactory.createDepartmentDao();
+            case "JDBC":
+                return new com.solvd.homework30nov2023.dao.jdbc.DepartmentDao();
+            case "MYBATIS":
+                return new com.solvd.homework30nov2023.dao.mybatis.DepartmentDao();
             default:
                 RuntimeException error = new RuntimeException(errorMessage);
                 LOGGER.error(error);
@@ -55,10 +55,10 @@ public class RepositoriesFactory {
 
     public static IEmployeeDao createEmployeeDao() {
         switch (type) {
-            case "RELATIONAL":
-                return RelationalRepositoriesFactory.createEmployeeDao();
-            case "NONRELATIONAL":
-                return NonRelationalRepositoriesFactory.createEmployeeDao();
+            case "JDBC":
+                return new com.solvd.homework30nov2023.dao.jdbc.EmployeeDao();
+            case "MYBATIS":
+                return new com.solvd.homework30nov2023.dao.mybatis.EmployeeDao();
             default:
                 RuntimeException error = new RuntimeException(errorMessage);
                 LOGGER.error(error);
