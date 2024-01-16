@@ -11,6 +11,7 @@ import com.solvd.homework30nov2023.designPatterns.listener.AdministrativeListene
 import com.solvd.homework30nov2023.designPatterns.listener.AnimalListenersHolder;
 import com.solvd.homework30nov2023.designPatterns.listener.VeterinaryListener;
 import com.solvd.homework30nov2023.designPatterns.listener.Zoo;
+import com.solvd.homework30nov2023.designPatterns.proxy.DogStylistProxy;
 import com.solvd.homework30nov2023.designPatterns.strategy.AnimalRepository;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
@@ -29,10 +30,9 @@ public class DesignPatternsHomework {
 //        builder();
 //        Listener();
         // TODO: Add Facade pattern
-        decorator();
-        // TODO: Add Proxy pattern
+//        decorator();
+        proxy();
 //        strategy();
-        // TODO: Check what MVC patterns I have to add, if I have to add it
     }
 
     private static void factory() {
@@ -138,5 +138,9 @@ public class DesignPatternsHomework {
 
     private static void decorator() {
         DogStylist.serviceDog(true, true);
+    }
+
+    private static void proxy() {
+        DogStylistProxy.serviceDog("John", "Doe", "1234-567891", true, true);
     }
 }
