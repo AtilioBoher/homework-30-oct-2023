@@ -10,6 +10,7 @@ import com.solvd.homework30nov2023.designPatterns.listener.AdministrativeListene
 import com.solvd.homework30nov2023.designPatterns.listener.AnimalListenersHolder;
 import com.solvd.homework30nov2023.designPatterns.listener.VeterinaryListener;
 import com.solvd.homework30nov2023.designPatterns.listener.Zoo;
+import com.solvd.homework30nov2023.designPatterns.strategy.AnimalRepository;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
 import com.solvd.homework30nov2023.model.Employee;
@@ -25,11 +26,11 @@ public class DesignPatternsHomework {
 //        factory();
 //        abstractFactory();
 //        builder();
-        Listener();
-        LOGGER.info("-------------------------Facade Pattern----------------------------");
-        LOGGER.info("-------------------------Decorator Pattern-------------------------");
-        LOGGER.info("-------------------------Proxy Pattern-----------------------------");
-        LOGGER.info("-------------------------Strategy Pattern--------------------------");
+//        Listener();
+        // TODO: Add Facade pattern
+        // TODO: Add Decorator pattern
+        // TODO: Add Proxy pattern
+        strategy();
         // TODO: Check what MVC patterns I have to add, if I have to add it
     }
 
@@ -113,5 +114,24 @@ public class DesignPatternsHomework {
         zoo.addAnimal(animal);
         LOGGER.info("-------------------------Remove animal----------------------------");
         zoo.removeAnimal(animal);
+    }
+
+    private static void strategy() {
+        AnimalRepository animalRepository = new AnimalRepository(); // is using JDBC by default
+        LOGGER.info("-------------------------Using JDBC----------------------------");
+        Optional<Animal> animal = animalRepository.getById(1L);
+        if (animal.isPresent()) {
+            LOGGER.info("getById: " + animal.get());
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
+        LOGGER.info("-------------------------Using My Batis----------------------------");
+        animalRepository.useMyBatis();
+        animal = animalRepository.getById(1L);
+        if (animal.isPresent()) {
+            LOGGER.info("getById: " + animal.get());
+        } else {
+            LOGGER.info("getById: Entry not found");
+        }
     }
 }
