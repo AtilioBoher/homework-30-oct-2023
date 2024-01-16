@@ -4,6 +4,7 @@ import com.solvd.homework30nov2023.dao.IAnimalDao;
 import com.solvd.homework30nov2023.dao.IDepartmentDao;
 import com.solvd.homework30nov2023.dao.IEmployeeDao;
 import com.solvd.homework30nov2023.designPatterns.builder.Mascot;
+import com.solvd.homework30nov2023.designPatterns.decorator.DogStylist;
 import com.solvd.homework30nov2023.designPatterns.factory.RelationalRepositoriesFactory;
 import com.solvd.homework30nov2023.designPatterns.factory.RepositoriesFactory;
 import com.solvd.homework30nov2023.designPatterns.listener.AdministrativeListener;
@@ -28,9 +29,9 @@ public class DesignPatternsHomework {
 //        builder();
 //        Listener();
         // TODO: Add Facade pattern
-        // TODO: Add Decorator pattern
+        decorator();
         // TODO: Add Proxy pattern
-        strategy();
+//        strategy();
         // TODO: Check what MVC patterns I have to add, if I have to add it
     }
 
@@ -133,5 +134,9 @@ public class DesignPatternsHomework {
         } else {
             LOGGER.info("getById: Entry not found");
         }
+    }
+
+    private static void decorator() {
+        DogStylist.serviceDog(true, true);
     }
 }

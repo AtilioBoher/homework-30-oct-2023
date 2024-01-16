@@ -58,7 +58,7 @@ public class Mascot {
     public static class Builder {
         private final Mascot mascot;
 
-        public  Builder(Mascot mascot) {
+        public Builder(Mascot mascot) {
             this.mascot = mascot;
         }
 

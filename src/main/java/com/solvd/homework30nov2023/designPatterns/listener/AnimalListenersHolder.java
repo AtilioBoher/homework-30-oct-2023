@@ -18,11 +18,15 @@ public class AnimalListenersHolder {
     }
 
     public static void onAddingAnimal(Animal animal) {
-        listeners.forEach(listener -> {listener.onAddingAnimal(animal);});
+        listeners.forEach(listener -> {
+            listener.onAddingAnimal(animal);
+        });
     }
 
     public static void onRemovingAnimal(Animal animal) {
-        listeners.forEach(listener -> {listener.onRemovingAnimal(animal);});
+        listeners.forEach(listener -> {
+            listener.onRemovingAnimal(animal);
+        });
     }
 
 }

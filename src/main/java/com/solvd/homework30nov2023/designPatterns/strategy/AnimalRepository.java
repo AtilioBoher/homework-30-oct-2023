@@ -23,21 +23,31 @@ public class AnimalRepository {
 
     public Optional<Animal> getById(Long id) {
         return repository.getById(id);
-    };
+    }
+
+    ;
 
     public Long insert(Animal animal) {
         return repository.insert(animal);
-    };
+    }
+
+    ;
 
     public void update(Animal animal, Long id) {
         repository.update(animal, id);
-    };
+    }
+
+    ;
 
     public void removeById(Long id) {
         repository.removeById(id);
-    };
+    }
+
+    ;
 
     public List<Animal> getAll() {
         return repository.getAll();
-    };
+    }
+
+    ;
 }
