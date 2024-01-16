@@ -29,7 +29,14 @@ public class DesignPatternsHomework {
 //        abstractFactory();
 //        builder();
 //        Listener();
-        // TODO: Add Facade pattern
+
+        // Here should go the facade pattern, but I've decided no to add it
+        // because I think I use it all the time. The best example I think it's
+        // on the xml parsing task using DOM, JAXB and Jackson. There I hide
+        // the logic of the implementation of each parsers behind methods,
+        // which works as the facade, that makes the code more organized,
+        // easier to read and modify if I need to.
+
 //        decorator();
         proxy();
 //        strategy();
