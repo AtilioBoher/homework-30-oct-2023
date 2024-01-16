@@ -3,6 +3,7 @@ package com.solvd.homework30nov2023.homework;
 import com.solvd.homework30nov2023.dao.IAnimalDao;
 import com.solvd.homework30nov2023.dao.IDepartmentDao;
 import com.solvd.homework30nov2023.dao.IEmployeeDao;
+import com.solvd.homework30nov2023.designPatterns.builder.Mascot;
 import com.solvd.homework30nov2023.designPatterns.factory.RelationalRepositoriesFactory;
 import com.solvd.homework30nov2023.designPatterns.factory.RepositoriesFactory;
 import com.solvd.homework30nov2023.model.Animal;
@@ -18,8 +19,8 @@ public class DesignPatternsHomework {
 
     public static void designPatternsHomework() {
 //        factory();
-        abstractFactory();
-        LOGGER.info("-------------------------Builder Pattern---------------------------");
+//        abstractFactory();
+        builder();
         LOGGER.info("-------------------------Listener Pattern--------------------------");
         LOGGER.info("-------------------------Facade Pattern----------------------------");
         LOGGER.info("-------------------------Decorator Pattern-------------------------");
@@ -84,5 +85,19 @@ public class DesignPatternsHomework {
         } else {
             LOGGER.info("getById: Entry not found");
         }
+    }
+
+    private static void builder() {
+
+        Mascot mascot = Mascot.builder()
+                .name("Spike")
+                .specie("Dog")
+                .status("In a cage")
+                .placeOfOrigin("Argentina")
+                .age(3)
+                .cageId(23)
+                .tagId(54)
+                .build();
+        LOGGER.info(mascot);
     }
 }
