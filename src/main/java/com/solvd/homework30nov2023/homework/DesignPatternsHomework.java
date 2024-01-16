@@ -6,6 +6,10 @@ import com.solvd.homework30nov2023.dao.IEmployeeDao;
 import com.solvd.homework30nov2023.designPatterns.builder.Mascot;
 import com.solvd.homework30nov2023.designPatterns.factory.RelationalRepositoriesFactory;
 import com.solvd.homework30nov2023.designPatterns.factory.RepositoriesFactory;
+import com.solvd.homework30nov2023.designPatterns.listener.AdministrativeListener;
+import com.solvd.homework30nov2023.designPatterns.listener.AnimalListenersHolder;
+import com.solvd.homework30nov2023.designPatterns.listener.VeterinaryListener;
+import com.solvd.homework30nov2023.designPatterns.listener.Zoo;
 import com.solvd.homework30nov2023.model.Animal;
 import com.solvd.homework30nov2023.model.Department;
 import com.solvd.homework30nov2023.model.Employee;
@@ -20,8 +24,8 @@ public class DesignPatternsHomework {
     public static void designPatternsHomework() {
 //        factory();
 //        abstractFactory();
-        builder();
-        LOGGER.info("-------------------------Listener Pattern--------------------------");
+//        builder();
+        Listener();
         LOGGER.info("-------------------------Facade Pattern----------------------------");
         LOGGER.info("-------------------------Decorator Pattern-------------------------");
         LOGGER.info("-------------------------Proxy Pattern-----------------------------");
@@ -88,7 +92,6 @@ public class DesignPatternsHomework {
     }
 
     private static void builder() {
-
         Mascot mascot = Mascot.builder()
                 .name("Spike")
                 .specie("Dog")
@@ -99,5 +102,16 @@ public class DesignPatternsHomework {
                 .tagId(54)
                 .build();
         LOGGER.info(mascot);
+    }
+
+    private static void Listener() {
+        Zoo zoo = new Zoo();
+        AnimalListenersHolder.subscribe(new VeterinaryListener());
+        AnimalListenersHolder.subscribe(new AdministrativeListener());
+        Animal animal = new Animal();
+        LOGGER.info("-------------------------Add animal----------------------------");
+        zoo.addAnimal(animal);
+        LOGGER.info("-------------------------Remove animal----------------------------");
+        zoo.removeAnimal(animal);
     }
 }
