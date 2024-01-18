@@ -34,9 +34,7 @@ public class RepositoriesFactory {
             case "NONRELATIONAL":
                 return NonRelationalRepositoriesFactory.createAnimalDao();
             default:
-                RuntimeException error = new RuntimeException(errorMessage);
-                LOGGER.error(error);
-                throw error;
+                throw new RuntimeException(errorMessage);
         }
     }
 
@@ -47,9 +45,7 @@ public class RepositoriesFactory {
             case "NONRELATIONAL":
                 return NonRelationalRepositoriesFactory.createDepartmentDao();
             default:
-                RuntimeException error = new RuntimeException(errorMessage);
-                LOGGER.error(error);
-                throw error;
+                throw new RuntimeException(errorMessage);
         }
     }
 
@@ -60,9 +56,7 @@ public class RepositoriesFactory {
             case "NONRELATIONAL":
                 return NonRelationalRepositoriesFactory.createEmployeeDao();
             default:
-                RuntimeException error = new RuntimeException(errorMessage);
-                LOGGER.error(error);
-                throw error;
+                throw new RuntimeException(errorMessage);
         }
     }
 }

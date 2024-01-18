@@ -34,9 +34,7 @@ public class RelationalRepositoriesFactory {
             case "MYBATIS":
                 return new com.solvd.homework30nov2023.dao.mybatis.AnimalDao();
             default:
-                RuntimeException error = new RuntimeException(errorMessage);
-                LOGGER.error(error);
-                throw error;
+                throw new RuntimeException(errorMessage);
         }
     }
 
@@ -47,9 +45,7 @@ public class RelationalRepositoriesFactory {
             case "MYBATIS":
                 return new com.solvd.homework30nov2023.dao.mybatis.DepartmentDao();
             default:
-                RuntimeException error = new RuntimeException(errorMessage);
-                LOGGER.error(error);
-                throw error;
+                throw new RuntimeException(errorMessage);
         }
     }
 
@@ -60,9 +56,7 @@ public class RelationalRepositoriesFactory {
             case "MYBATIS":
                 return new com.solvd.homework30nov2023.dao.mybatis.EmployeeDao();
             default:
-                RuntimeException error = new RuntimeException(errorMessage);
-                LOGGER.error(error);
-                throw error;
+                throw new RuntimeException(errorMessage);
         }
     }
 }

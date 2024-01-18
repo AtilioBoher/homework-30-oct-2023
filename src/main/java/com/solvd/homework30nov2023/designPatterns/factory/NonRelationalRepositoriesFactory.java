@@ -33,26 +33,20 @@ public class NonRelationalRepositoriesFactory {
         if (type.equals("MONGODB")) {
             return new AnimalDao();
         }
-        RuntimeException error = new RuntimeException(errorMessage);
-        LOGGER.error(error);
-        throw error;
+        throw new RuntimeException(errorMessage);
     }
 
     public static IDepartmentDao createDepartmentDao() {
         if (type.equals("MONGODB")) {
             return new DepartmentDao();
         }
-        RuntimeException error = new RuntimeException(errorMessage);
-        LOGGER.error(error);
-        throw error;
+        throw new RuntimeException(errorMessage);
     }
 
     public static IEmployeeDao createEmployeeDao() {
         if (type.equals("MONGODB")) {
             return new EmployeeDao();
         }
-        RuntimeException error = new RuntimeException(errorMessage);
-        LOGGER.error(error);
-        throw error;
+        throw new RuntimeException(errorMessage);
     }
 }
